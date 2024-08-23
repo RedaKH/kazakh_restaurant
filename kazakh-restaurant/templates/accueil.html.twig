@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<main>
+
+    <section class="hero is-danger is-fullheight-with-navbar">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title ml9" id="resto">
+                    <span class="text-wrapper">
+                        <span class="letters">Restaurant Franco-Kazakh</span>
+                    </span>
+                </h1>
+                <h2 id="kazakh" class="subtitle ml9">
+                    <span class="text-wrapper">
+                        <span class="letters">Découvrez les meilleures saveurs du Kazakhstan et laissez-vous transporter dans ce pays</span>
+                    </span>
+                </h2>
+                <button class="button is-primary"> Explorez le site</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about-us" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <div class="container has-text-centered">
+            <div class="columns">
+                <div class="column is-two-thirds">
+                    <h2 class="title is-2">Qui nous sommes?</h2>
+                    <p>
+                        Bienvenue chez Besharmaq Food, votre destination pour découvrir la cuisine authentique du Kazakhstan en plein cœur de la ville. Nous sommes fiers de vous offrir une expérience culinaire unique, enracinée dans les traditions kazakhes.
+
+                        Chez Besharmaq Food, nous célébrons la culture et l'hospitalité kazakhes avec chaque plat. Notre chef, originaire d'Almaty, utilise des recettes familiales et des ingrédients frais, souvent importés directement du Kazakhstan.
+
+                        Découvrez des plats traditionnels comme le beshbarmak, un ragoût de viande servi avec des nouilles maison, ou nos samsas, des feuilletés croustillants farcis à la viande et aux épices. Ne manquez pas de goûter notre shubat, un lait de chamelle fermenté rafraîchissant.
+
+                        Besharmaq Food est un lieu de rencontre et de partage. Notre décor chaleureux et accueillant, inspiré des motifs et artefacts traditionnels, vous fera sentir comme chez vous. Nous croyons que la nourriture rapproche les gens et nous sommes ravis de vous accueillir pour célébrer des moments spéciaux ou simplement passer une soirée agréable.
+
+                        Rejoignez-nous pour un voyage culinaire au cœur du Kazakhstan. Chez Besharmaq Food, nous sommes bien plus qu'un restaurant – nous sommes une fenêtre sur le Kazakhstan, un hommage vivant à nos traditions et une promesse de saveurs mémorables.
+                    </p>
+                </div>
+                <div class="column">
+                    <img class="image is-640x380" src="https://foodperestroika.com/wp-content/uploads/2015/11/BeshbarmakZhetiKazyna2-small.jpg" alt="Image du plat Beshbarmak">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services" data-aos="flip-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">Nos services</h1>
+            <div class="columns">
+                <div class="column is-mobile">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('Restaurant-Online-Food-Delivery-1.webp') }}" alt="Service de livraison">
+                            <p class="subtitle">Livraisons</p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a href="livraison.html">En savoir plus</a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+
+                <div class="column is-mobile">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('tgi-fridays-drinks.jpeg') }}" alt="Service de privatisation">
+                            <p class="subtitle">Privatisation</p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a href="privatisation.html">En savoir plus</a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('doggy-bag.jpg') }}" alt="Service à emporter">
+                            <p class="subtitle">Emporter</p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a href="emporter.html">En savoir plus</a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+
+                <div class="column is-mobile">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="Service sur place">
+                            <p class="subtitle">Sur place</p>
+                        </div>
+                        <footer class="card-footer">
+                            <p class="card-footer-item">
+                                <a href="surplace.html">En savoir plus</a>
+                            </p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section blog" data-aos="zoom-in-up" data-aos-offset="700" data-aos-easing="ease-in-sine">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">Notre Blog</h1>
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="media">
+                        <figure class="media-left">
+                            <p class="image is-128x128">
+                                <img src="{{ asset('/plats/airag-drink.jpg') }}" alt="Airag">
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <p class="has-text-weight-bold">L'airag recette typique d'Asie Central</p>
+                                <p>Comment préparer l'airag?</p>
+                            </div>
+                            <a href="blog_airag.html">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="media">
+                        <figure class="media-left">
+                            <p class="image is-128x128">
+                                <img src="{{ asset('airag-drink.jpg') }}" alt="Airag">
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <p class="has-text-weight-bold">L'airag recette typique d'Asie Central</p>
+                                <p>Comment préparer l'airag?</p>
+                            </div>
+                            <a href="blog_airag.html">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section temoignages" data-aos="zoom-in-up" data-aos-offset="800" data-aos-easing="ease-in-sine">
+        <div class="container has-text-centered">
+            <h1 class="title is-1">Nos témoignages</h1>
+            <div class="columns is-multiline">
+                <div class="column is-full">
+                    <div style="margin: 0 auto; padding-top: 80px; padding-bottom: 80px;">
+                        <div class="testimonial-quote group">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kassym-Jomart_Tokayev_%282020-02-01%29.jpg/220px-Kassym-Jomart_Tokayev_%282020-02-01%29.jpg" alt="Kassym-Jomart Tokayev">
+                            <div class="quote-container">
+                                <blockquote>
+                                    <p>Ce restaurant est un pur délice je recommande à tous les Kazakhs</p>
+                                </blockquote>
+                                <cite><span>Kassym Jomart Tokayev</span><br>Président du Kazakhstan</cite>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Répéter ce bloc pour d'autres témoignages -->
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

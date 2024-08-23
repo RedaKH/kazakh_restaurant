@@ -1,64 +1,87 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr" data-theme="{{ theme | default('light') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ asset('styles.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        <header>
-            <nav class="navbar" role="navigation" aria-label="dropdown navigation">
-                <div class="navbar-start">
-                    <img src="{{ asset('assets/logo/logo.png') }}" style="max-height: 70px;" alt="logo" srcset="">
-    
-                </div>
-                <div class="navbar-end">
-    
-                    <a href="{{ path('index') }}" class="navbar-item">
-                        Accueil
-                    </a>
-    
-                    <a href="{{ path('menus') }}" class="navbar-item">
-                        Menus
-                    </a>
-                    <a href="{{ path('blogs') }}" class="navbar-item">
-                        Blog
-                    </a>
-    
-                    <a href="{{ path('reservations') }}" class="navbar-item">
-                        Reservations
-                    </a>
-                    
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Langues
-                        </a>
-    
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item" href="{{ path('set_locale', { 'locale': 'fr' }) }}">
-                                Francais
-                            </a>
-                            <a class="navbar-item" href="{{ path('set_locale', { 'locale': 'en' }) }}">
-                                English
-                            </a>
-                            <a class="navbar-item" href="{{ path('set_locale', { 'locale': 'kk' }) }}">
-                                қазақша
-                            </a>
-                        </div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>{% block title %}Beshbarmaq Food{% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        {% block header %}
+        <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+            <div class="navbar-start">
+                <img src="{{ asset('logo/logo.png') }}" style="max-height: 70px;" alt="logo">
+            </div>
+            <div class="navbar-end">
+                <a href="" class="navbar-item">Accueil</a>
+                <a href="" class="navbar-item">Menus</a>
+                <a href="" class="navbar-item">Blog</a>
+                <a href="#" class="navbar-item">Reservations</a>
+                
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">Langues</a>
+                    <div class="navbar-dropdown">
+                        <a href="#" class="navbar-item">Français</a>
+                        <a href="#" class="navbar-item">English</a>
+                        <a href="#" class="navbar-item">қазақша</a>
                     </div>
-            </nav>
-    
-    
-        </header>
-        
-        
+                </div>
+            </div>
+        </nav>
         {% endblock %}
-    </body>
+    </header>
+
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        {% block footer %}
+        <div class="content has-text-centered">
+            <div class="columns">
+                <div class="column is-5">
+                    <h1 class="title is-1">Nos horaires</h1>
+                    <p>Du lundi au samedi de : 11h00 à 22h00</p>
+                </div>
+                <div class="column">
+                    <figure class="image is-128x128">
+                        <img src="{{ asset('logo/logo.png') }}" alt="Logo Beshbarmaq Food">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h1 class="title is-1">Notre Adresse</h1>
+                    <p>13 rue Tartampion 75000 Paris</p>
+                </div>
+            </div>
+            <a href="">Connexion employés</a>
+            <p>Fait par Réda Khaldi 2024</p>
+        </div>
+        {% endblock %}
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="{{ asset('script.js') }}"></script>
+</body>
 </html>

@@ -1,0 +1,224 @@
+body {
+    background-color: #F5F5DC; /* Blanc cassé */
+    color: #000000; /* Noir pour le texte */
+}
+
+.navbar, .footer {
+    background-color: #30D5C8; /* Bleu turquoise */
+}
+
+.navbar-item, .navbar-link, .card-footer-item a {
+    color: #000000 !important; /* Blanc pour les textes de navigation */
+}
+
+.hero {
+    position: relative;
+
+    background-image: url('../logo/4.jpg'); /* Remplacez par l'URL de votre image */
+    background-size: cover;
+    background-position: center;
+    
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Couche semi-transparente noire */
+    z-index: 1;
+}
+
+.hero-body {
+    position: relative;
+    z-index: 2;
+}
+
+h1, h2, h3 {
+    font-family: 'Great Vibes', cursive;
+
+}
+h4, h5, h6 {
+    font-family: 'Dancing Script', cursive;
+}
+body, p, li {
+    font-family: 'Raleway', sans-serif;
+}
+
+
+
+.button.is-primary {
+    background-color: #FFD700; /* Or pour les boutons */
+    color: #000000; /* Noir pour le texte des boutons */
+}
+
+.title {
+    color: #B22222; /* Rouge brique pour les titres */
+}
+
+.subtitle {
+    color: #000000;
+
+}
+
+.card {
+    border: 2px solid #FFD700; /* Bordures dorées pour les cartes */
+}
+
+.card-image img {
+    height: 250px;
+    object-fit: cover;
+}
+
+#resto{
+
+    font-family: 'Great Vibes', cursive; /* Utilisation de Great Vibes pour les titres */
+    color: #FFD700; /* Or pour les titres */
+    font-size: 3rem; /* Augmente la taille du texte des titres */
+
+}
+
+#kazakh{
+    color: #F5F5DC;
+
+    color: #FFFFFF; /* Blanc pour les sous-titres */
+    font-size: 2rem; /* Augmente la taille du texte des sous-titres */
+
+}
+
+
+h1 {
+  
+  margin-bottom: 40px;
+}
+
+.testimonial-quote {
+    font-size: 16px;
+    position: relative; 
+    margin-bottom: 2rem; 
+    font-family: 'Raleway', sans-serif; 
+
+}
+
+.testimonial-quote blockquote {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: none;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5em;
+    font-style: italic;
+    line-height: 1.4 !important;
+    position: relative;
+    text-shadow: 0 1px white;
+    z-index: 600;
+}
+
+.testimonial-quote blockquote p {
+    color: #000000; 
+    line-height: 1.4 !important;
+}
+
+.testimonial-quote blockquote p:first-child:before {
+    content: '\201C';
+    color: #B22222;
+    font-size: 7.5em;
+    font-weight: 700;
+    opacity: .3;
+    position: absolute;
+    top: -.4em;
+    left: -.2em;    
+    text-shadow: none;
+    z-index: -300;
+}
+
+.testimonial-quote img {
+    border: 3px solid #FFD700;
+    border-radius: 50%;
+    display: block;
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: -.2em; 
+    left: 0;
+}
+
+.testimonial-quote cite {
+    color: black;
+    display: block;
+    font-size: .8em; 
+}
+  
+.testimonial-quote cite span {
+    color: black;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 1px white; 
+}
+
+.testimonial-quote .quote-container {
+    padding-left: 160px; 
+}
+
+.testimonial-quote.right .quote-container {
+    padding-left: 0;
+    padding-right: 160px; 
+}
+
+
+
+@media (max-width: 768px) {
+    .testimonial-quote .quote-container {
+        padding-left: 0;
+        padding-top: 140px; /* Ajouter un espacement en haut pour l'image */
+    }
+    
+    .testimonial-quote img {
+        position: static;
+        margin: 0 auto;
+    }
+    
+    .testimonial-quote blockquote p:first-child:before {
+        font-size: 4em;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.ml9 {
+    position: relative;
+    font-weight: 200;
+    font-size: 4em;
+  }
+  
+  .ml9 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.2em;
+    padding-right: 0.05em;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+  }
+  
+  .ml9 .letter {
+    transform-origin: 50% 100%;
+    display: inline-block;
+    line-height: 1em;
+  }
+
+ .breadcrumb-container{
+    display:flex;
+    justify-content: center;
+ }
+
+
+ .menu-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
