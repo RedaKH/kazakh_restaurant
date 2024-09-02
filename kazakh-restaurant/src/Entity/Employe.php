@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use App\Repository\EmployeRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Enum\EmployeStatus;
+use App\Enum\Role;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
-class Employe implements PasswordAuthenticatedUserInterface
+class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,9 +28,9 @@ class Employe implements PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = []; // Stockage des rôles sous forme de chaînes
 
-    #[ORM\Column(type: 'string', enumType: EmployeStatus::class)]
-    private ?EmployeStatus $status = null;
     #[ORM\Column] // Ajoute cette ligne pour le mot de passe
     private ?string $password = null;
 
@@ -90,17 +90,7 @@ class Employe implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?EmployeStatus
-    {
-        return $this->status;
-    }
-
-    public function setStatus(EmployeStatus $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
+  
 
   
 
@@ -122,9 +112,43 @@ class Employe implements PasswordAuthenticatedUserInterface
         return null;
     }
 
+    public function getRoles(): array
+{
+    // Convertir les rôles en chaînes de caractères
+    $roles = array_map(function ($role) {
+        if ($role instanceof Role) {
+            return $role->value;
+        }
+
+        // Si le rôle est déjà une chaîne de caractères, le retourner tel quel
+        return $role;
+    }, $this->roles);
+
+    // Ajouter un rôle par défaut s'il n'y a pas de rôle spécifique
+    if (empty($roles)) {
+        $roles[] = Role::EMPLOYE->value;
+    }
+
+    return array_unique($roles);
+}
+
+
+    public function setRoles(array $roles): static
+    {
+        // Convertir chaque chaîne de caractères en instance de l'énumération Role
+        $this->roles = array_map(function($role) {
+            if ($role instanceof Role) {
+                return $role;
+            }
+            return Role::from($role);
+        }, $roles);
+
+        return $this;
+    }
+    
     public function eraseCredentials(): void
     {
-        // Implementer selon ton besoin
+
     }
     public function getUserIdentifier(): string
     {

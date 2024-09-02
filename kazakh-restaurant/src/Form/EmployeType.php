@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Blog;
 use App\Entity\Employe;
-use App\Enum\EmployeStatus;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,14 +23,18 @@ class EmployeType extends AbstractType
             ->add('prenom',TextType::class)
             ->add('telephone',TelType::class)
             ->add('email',EmailType::class)
-            ->add('status',ChoiceType::class,[
-                'choices'=>[
-                    'Admin'=>EmployeStatus::admin,
-                    'Chef'=>EmployeStatus::chef,
-                    'Serveur'=>EmployeStatus::serveur,
-                    'livreur'=>EmployeStatus::livreur,
-                    'autre'=>EmployeStatus::autre
-                ]
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'Chef' => 'ROLE_CHEF',
+                    'Serveur' => 'ROLE_SERVEUR',
+                    'Livreur' => 'ROLE_LIVREUR',
+                    'Employé' => 'ROLE_EMPLOYE',
+                ],
+                'multiple' => true,
+                'expanded' => false,
+                'attr' => ['class' => 'form-control'], // Ajoute une classe CSS si besoin
+
             ])
             ->add('password', PasswordType::class)
             ->add('save', SubmitType::class,[

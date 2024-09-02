@@ -24,7 +24,7 @@ class EmployeController extends AbstractController
         
     }
 
-    #[Route('/employe/new', name: 'add_employe')]
+    #[Route('/admin/new', name: 'add_employe')]
     public function add_employe(Request $request, UserPasswordHasherInterface $passwordhasher): Response
     {
         $employe = new Employe();
@@ -50,4 +50,12 @@ class EmployeController extends AbstractController
             'form'=> $form->createView()
         ]);
     }
+
+    #[Route('/employe/dashboard', name: 'employe_dashboard')]
+    public function dashboard(): Response
+    {
+        return $this->render('employe/dashboard.html.twig');
+    }
+
+
 }
