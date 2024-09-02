@@ -7,6 +7,8 @@ enum EmployeStatus: string
     case chef = 'chef';
     case serveur = 'serveur';
     case autre = 'autre';
+    case livreur = 'livreur';
+
 }
 
 ?>

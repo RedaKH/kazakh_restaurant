@@ -1,0 +1,18 @@
+{# templates/employe/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Employé{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un Nouvel Employé</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.status) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}

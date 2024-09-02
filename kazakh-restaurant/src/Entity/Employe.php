@@ -5,9 +5,12 @@ namespace App\Entity;
 use App\Repository\EmployeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\EmployeStatus;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
-class Employe
+class Employe implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,12 +26,16 @@ class Employe
     #[ORM\Column(length: 255)]
     private ?string $telephone = null;
 
-    #[ORM\Column(enumType: EmployeStatus::class)]
-    private ?EmployeStatus $status = null;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $email = null;
 
-    #[ORM\ManyToOne(inversedBy: 'author_id')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Blog $author_id = null;
+    #[ORM\Column(type: 'string', enumType: EmployeStatus::class)]
+    private ?EmployeStatus $status = null;
+    #[ORM\Column] // Ajoute cette ligne pour le mot de passe
+    private ?string $password = null;
+
+
+
 
     public function getId(): ?int
     {
@@ -71,6 +78,18 @@ class Employe
         return $this;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
     public function getStatus(): ?EmployeStatus
     {
         return $this->status;
@@ -83,17 +102,37 @@ class Employe
         return $this;
     }
 
-    public function getAuthorId(): ?Blog
+  
+
+   
+
+    public function getPassword(): string
     {
-        return $this->author_id;
+        return $this->password;
     }
 
-    public function setAuthorId(?Blog $author_id): static
+    public function setPassword(string $password): static
     {
-        $this->author_id = $author_id;
-
+        $this->password = $password;
         return $this;
     }
+
+
+    public function getSalt(): ?string{
+        return null;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // Implementer selon ton besoin
+    }
+    public function getUserIdentifier(): string
+    {
+        // Retourne l'email comme identifiant unique
+        return $this->email;
+    }
+
+    
 
    
 }
