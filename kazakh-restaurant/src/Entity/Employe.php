@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmployeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\Role;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -33,6 +35,17 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column] // Ajoute cette ligne pour le mot de passe
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Blog>
+     */
+    #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'Author')]
+    private Collection $blogs;
+
+    public function __construct()
+    {
+        $this->blogs = new ArrayCollection();
+    }
 
 
 
@@ -155,6 +168,37 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
         // Retourne l'email comme identifiant unique
         return $this->email;
     }
+
+    /**
+     * @return Collection<int, Blog>
+     */
+    public function getBlogs(): Collection
+    {
+        return $this->blogs;
+    }
+
+    public function addBlog(Blog $blog): static
+    {
+        if (!$this->blogs->contains($blog)) {
+            $this->blogs->add($blog);
+            $blog->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlog(Blog $blog): static
+    {
+        if ($this->blogs->removeElement($blog)) {
+            // set the owning side to null (unless already changed)
+            if ($blog->getAuthor() === $this) {
+                $blog->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
 
     
 

@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Blog{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <section class=" section blog">
+
+        <div class="container has-text-centered">
+            <h1 class="title">Notre Blog</h1>
+
+            <div class="columns">
+
+
+             <div class="column is-half">
+                {% for blog in blogs %}
+                    
+
+
+                    <div class="media">
+                        <figure class="media-left">
+                            <p class="image is-128x128">
+                                <img src="{{ asset('uploads/' ~  blog.image)}}" >
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <p class="has-text-weight-bold">
+                                    {{blog.title}}
+                                </p>
+                                <p>
+                                    {{blog.content|slice(0,100)|raw}}
+                                </p>
+                                <time datetime="{{blog.createdAt|date('Y-m-d')}}">{{blog.createdAt|date('Y-m-d')}}</time>
+                            
+                            </div>
+
+                            <a href="{{path('blog_read', {id:blog.id}) }}" class=""> En savoir plus </a>
+                            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYE')%}
+                            <a href="{{path('edit_blog',{id:blog.id})}}" class="button-is-warning">Modifier </a>
+                            <a href="{{path('delete_blog',{id:blog.id})}}" class="button-is-warning">Supprimer </a>
+
+
+                                
+                            {% endif %}
+
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+
+         
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+    </section>
+
+</main>
+
+{% endblock %}

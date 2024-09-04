@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\BlogRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,19 +23,15 @@ class Blog
     #[ORM\Column(length: 500)]
     private ?string $image = null;
 
+    #[ORM\ManyToOne(inversedBy: 'blogs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Employe $Author = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    /**
-     * @var Collection<int, Employe>
-     */
-    #[ORM\OneToMany(targetEntity: Employe::class, mappedBy: 'author_id')]
-    private Collection $author_id;
+ 
 
-    public function __construct()
-    {
-        $this->author_id = new ArrayCollection();
-    }
 
 
     public function getId(): ?int
@@ -81,6 +75,18 @@ class Blog
         return $this;
     }
 
+    public function getAuthor(): ?Employe
+    {
+        return $this->Author;
+    }
+
+    public function setAuthor(?Employe $Author): static
+    {
+        $this->Author = $Author;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
@@ -93,35 +99,13 @@ class Blog
         return $this;
     }
 
-    /**
-     * @return Collection<int, Employe>
-     */
-    public function getAuthorId(): Collection
-    {
-        return $this->author_id;
-    }
 
-    public function addAuthorId(Employe $authorId): static
-    {
-        if (!$this->author_id->contains($authorId)) {
-            $this->author_id->add($authorId);
-            $authorId->setAuthorId($this);
-        }
 
-        return $this;
-    }
+  
 
-    public function removeAuthorId(Employe $authorId): static
-    {
-        if ($this->author_id->removeElement($authorId)) {
-            // set the owning side to null (unless already changed)
-            if ($authorId->getAuthorId() === $this) {
-                $authorId->setAuthorId(null);
-            }
-        }
 
-        return $this;
-    }
+
+
 
   
 }

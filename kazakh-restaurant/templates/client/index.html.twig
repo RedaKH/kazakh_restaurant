@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+    <h1>Faire une réservation</h1>
+
+    {{ form_start(form, {'attr': {'class': 'box'}}) }}
+        <div class="field">
+            {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.nom, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.prenom, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.email, 'Email', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.email, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.adresse, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.codePostal, 'Code Postal', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.codePostal, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.telephone, 'Numéro de téléphone', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.telephone, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.nombrePersonnes, 'Nombre de Personnes', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.nombrePersonnes, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.dateReservation, 'Date de réservation', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.dateReservation, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.typeReservation, 'Choix du type de réservation', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                <div class="select">
+                    {{ form_widget(form.typeReservation) }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="field">
+            {{ form_label(form.preferencesAlimentaires, 'Auriez-vous des préférences alimentaires/allergies', {'label_attr': {'class': 'label'}}) }}
+            <div class="control">
+                {{ form_widget(form.preferencesAlimentaires, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+        
+        <div class="control">
+            {{ form_widget(form.submit, {'attr': {'class': 'button is-link'}}) }}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

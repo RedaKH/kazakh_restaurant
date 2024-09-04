@@ -53,3 +53,27 @@ function fitVideo() {
     $('#video-viewport').scrollTop(($('video').height() - $('.fullsize-video-bg').height()) / 2);
 
 };
+
+
+$('#summernote').summernote({
+    height: 300,
+    callbacks: {
+        onImageUpload: function(files) {
+            var data = new FormData();
+            data.append("file", files[0]);
+            $.ajax({
+                url: '/upload-image',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(url) {
+                    $('#summernote').summernote('insertImage', url);
+                }
+            });
+        }
+    }
+});
+
+

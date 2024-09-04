@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Blog;
-use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,13 +18,7 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('title',TextType::class)
-            ->add('content',CKEditorType::class,[
-                'config'=>[
-                    'toolbar'=>'basic',
-                    'height'=>'300px'
-                ]
-            ]
-            )
+            ->add('content', CKEditorType::class)
             ->add('image', FileType::class, [
                 'label' => 'Image (JPG, PNG file)',
                 'mapped' => false, // Indique que ce champ n'est pas lié à une propriété de l'entité
