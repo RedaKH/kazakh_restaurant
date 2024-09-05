@@ -32,8 +32,6 @@ class Commande
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $plat = null;
 
 
     public function __construct()
@@ -107,17 +105,6 @@ class Commande
         return $this;
     }
 
-    public function getPlat(): ?string
-    {
-        return $this->plat;
-    }
-
-    public function setPlat(string $plat): static
-    {
-        $this->plat = $plat;
-
-        return $this;
-    }
 
  
 }

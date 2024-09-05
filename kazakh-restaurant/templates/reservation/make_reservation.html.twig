@@ -6,22 +6,21 @@
 <div class="container">
     <h1>Reservation</h1>
 
-    {{form_start(form,{'attr':{'class':'box'} } ) }}
-    {{form_row(form.client_nom)}}
-    {{form_row(form.client_prenom)}}
-    {{form_row(form.client_email)}}
-    {{form_row(form.client_adresse)}}
-    {{form_row(form.client_code_postal)}}
-    {{form_row(form.client_num_tel)}}
-    {{form_row(form.date_reservation)}}
-    {{form_row(form.ReservationType)}}
-    {{form_row(form.nombre_personne)}}
-    {{form_row(form.plat)}}
-    {{form_row(form.submit)}}
+    {{ form_start(form, {'action': path('make_reservation'), 'attr': {'class': 'box'}}) }}
 
+    {{ form_row(form.client_nom) }}
+    {{ form_row(form.client_prenom) }}
+    {{ form_row(form.client_email) }}
+    {{ form_row(form.client_adresse) }}
+    {{ form_row(form.client_ville) }}
+    {{ form_row(form.client_code_postal) }}
+    {{ form_row(form.client_num_tel) }}
+    {{ form_row(form.date_reservation) }}
+    {{ form_row(form.ReservationType) }}
+    {{ form_row(form.nombre_personne) }}
+    {{ form_row(form.plat) }}
+    {{ form_row(form.submit) }}
 
-
-
-
+    {{ form_end(form) }}
 </div>
 {% endblock %}

@@ -1,51 +1,48 @@
-<?php
+<?php // src/Controller/ReservationController.php
 
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Commande;
 use App\Entity\Reservation;
-use App\Enum\ReservationType;
+use App\Enum\CommandeStatus;
 use App\Form\ClientReservationType;
-use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ReservationController extends AbstractController
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-
-    #[Route('/make_reservation', name: 'make_reservation')]
-    public function add_reservation(Request $request,ReservationRepository $reservationRepository): Response
+    #[Route('/make_reservation', name: 'make_reservation', methods: ['GET', 'POST'])]
+    public function addReservation(Request $request): Response
     {
         $reservation = new Reservation();
         $form = $this->createForm(ClientReservationType::class, $reservation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion des champs non mappés pour l'entité Client
 
-          /*  $dateReservation = $reservation->getDateReservation();
-
-
-            //appel de la méthode pour savoir si une date est disponible
-            if (!$this->canReserveOnDate($dateReservation,$reservationRepository)) {
-                $this->addFlash('danger','Impossible de réserver à cette date. Une privatisation est prévue');
-
-                return $this->redirectToRoute('reservation_failure');
-            } */
+            $commande = new Commande();
             $client = $reservation->getClient();
+            $commande->setDateCommande(new \DateTimeImmutable());
 
-            //associer le client à la reservation
+            $commande->setCommandeStatus([CommandeStatus::en_preparation]);
+
+            $this->entityManager->persist($commande);
+
+            $reservation->setCommande($commande);
+
             if (!$client) {
-                //Créer un nouveau client 
                 $client = new Client();
                 $client->setNom($form->get('client_nom')->getData());
                 $client->setPrenom($form->get('client_prenom')->getData());
@@ -54,22 +51,19 @@ class ReservationController extends AbstractController
                 $client->setVille($form->get('client_ville')->getData());
                 $client->setEmail($form->get('client_email')->getData());
                 $client->setNumTel($form->get('client_num_tel')->getData());
-
-
+    
                 $this->entityManager->persist($client);
             }
+     
+            $this->entityManager->flush();
+
             $reservation->setClient($client);
             $reservation->setDateReservation(new \DateTimeImmutable());
+
             $this->entityManager->persist($reservation);
             $this->entityManager->flush();
 
-
-            // $this->sendConfirmationEmail($client);
-
-
-            $this->addFlash('success', 'Reservation validé ! ');
-
-
+            $this->addFlash('success', 'Réservation enregistrée avec succès !');
 
             return $this->redirectToRoute('reservation_success');
         }
@@ -78,6 +72,4 @@ class ReservationController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
 }
