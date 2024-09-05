@@ -24,17 +24,16 @@ class Commande
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'commande')]
     private Collection $reservation_id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $plat = null;
 
-    #[ORM\Column]
-    private ?int $qte = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY, enumType: CommandeStatus::class)]
     private array $commandeStatus = [];
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $plat = null;
 
 
     public function __construct()
@@ -77,29 +76,9 @@ class Commande
         return $this;
     }
 
-    public function getPlat(): ?string
-    {
-        return $this->plat;
-    }
+   
 
-    public function setPlat(string $plat): static
-    {
-        $this->plat = $plat;
-
-        return $this;
-    }
-
-    public function getQte(): ?int
-    {
-        return $this->qte;
-    }
-
-    public function setQte(int $qte): static
-    {
-        $this->qte = $qte;
-
-        return $this;
-    }
+   
 
     /**
      * @return CommandeStatus[]
@@ -124,6 +103,18 @@ class Commande
     public function setDateCommande(\DateTimeInterface $date_commande): static
     {
         $this->date_commande = $date_commande;
+
+        return $this;
+    }
+
+    public function getPlat(): ?string
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(string $plat): static
+    {
+        $this->plat = $plat;
 
         return $this;
     }

@@ -3,10 +3,10 @@ namespace App\Enum;
 
 enum ReservationType : string
 {
-    case sur_place = 'sur_place';
-    case emporter = 'emporter';
-    case livraison = 'livraison';
-    case privatisation = 'privatisation';
+    case SUR_PLACE = 'sur_place';
+    case EMPORTER = 'emporter';
+    case LIVRAISON = 'livraison';
+    case PRIVATISATION = 'privatisation';
 }
 
 ?>

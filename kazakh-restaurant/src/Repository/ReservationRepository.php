@@ -40,4 +40,17 @@ class ReservationRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function canReserveOnDate(\DateTimeImmutable $date):bool {
+   $privatisation = $this->createQueryBuilder('r')
+     ->andWhere('r.date_reservation = :date')
+     ->andWhere('r.ReservationType = :type')
+     ->setParameter('date',$date)
+     ->setParameter('type','privatisation')
+     ->getQuery()
+     ->getOneOrNullResult();
+
+     return $privatisation === null;
+
+}
 }

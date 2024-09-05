@@ -15,4 +15,13 @@ class ClientController extends AbstractController
             'controller_name' => 'ClientController',
         ]);
     }
+
+    private function generateCode(int $length = 6): string {
+
+        return substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', $length)),0,$length);
+
+
+
+
+    }
 }

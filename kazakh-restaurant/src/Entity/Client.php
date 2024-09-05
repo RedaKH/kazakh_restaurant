@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -36,6 +38,17 @@ class Client
 
     #[ORM\Column(nullable: true)]
     private ?int $code_client = null;
+
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'client')]
+    private Collection $reserver;
+
+    public function __construct()
+    {
+        $this->reserver = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +147,36 @@ class Client
     public function setCodeClient(?int $code_client): static
     {
         $this->code_client = $code_client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReserver(): Collection
+    {
+        return $this->reserver;
+    }
+
+    public function addReserver(Reservation $reserver): static
+    {
+        if (!$this->reserver->contains($reserver)) {
+            $this->reserver->add($reserver);
+            $reserver->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserver(Reservation $reserver): static
+    {
+        if ($this->reserver->removeElement($reserver)) {
+            // set the owning side to null (unless already changed)
+            if ($reserver->getClient() === $this) {
+                $reserver->setClient(null);
+            }
+        }
 
         return $this;
     }

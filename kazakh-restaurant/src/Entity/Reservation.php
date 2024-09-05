@@ -31,6 +31,13 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?Commande $commande = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reserver')]
+    private ?Client $client = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $plat = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,4 +102,30 @@ class Reservation
 
         return $this;
     }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getPlat(): ?string
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(string $plat): static
+    {
+        $this->plat = $plat;
+
+        return $this;
+    }
+
+
 }
