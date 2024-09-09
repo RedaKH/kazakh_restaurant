@@ -1,0 +1,62 @@
+{% extends 'header-employe.html.twig' %}
+
+{% block title %}Hello EmployeController!{% endblock %}
+
+{% block body %}
+<div class="container-has-text-centered">
+
+    <div class="field has-addons">
+        <div class="control">
+          <input class="input" type="text" placeholder="Rechercher une commande">
+        </div>
+        <div class="control">
+          <button class="button is-info">Rechercher</button>
+        </div>
+    </div>
+
+    <div class="box">
+        <h1 class="title">Bienvenue Admin</h1>
+        <h4 class="subtitle">Voici les réservations de vos clients</h4>
+
+        <div class="table-container">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse email</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Adresse</th>
+                        <th>Sélection de commandes</th>
+                        <th>Date et heure</th>
+                        <th>Préférences Alimentaires/Allergies</th>
+                        <th>Statut de la réservation</th>
+                        <th>Confirmation Envoyée</th>
+                        <th>Rappel Envoyée</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.client.nom }}</td>
+                                <td>{{ reservation.client.prenom }}</td>
+                                <td>{{ reservation.client.email }}</td>
+                                <td>{{ reservation.client.num_tel }}</td>
+                                <td>{{ reservation.client.adresse }}</td>
+                                <td>{{ reservation.ReservationType }}</td>
+                                <td>{{ reservation.date_reservation|date('Y-m-d H:i') }}</td>
+                                <td>{{ reservation.preferences }}</td>
+                                <td>{{ reservation.status }}</td>
+                                <td>{{ reservation.confirmationEnvoyee ? 'Oui' : 'Non' }}</td>
+                                <td>{{ reservation.rappelEnvoyee ? 'Oui' : 'Non' }}</td>
+                                <td>
+                                    <a href="{{ path('reservation_accept', {'id': reservation.id}) }}" class="button is-small is-primary">Accepter</a>
+                                    <a href="{{ path('reservation_delete', {'id': reservation.id}) }}" class="button is-small is-danger">Supprimer</a>
+                                </td>
+
+
+                    </tr>
+                    {% endfor %}
+</div>
+{% endblock %}

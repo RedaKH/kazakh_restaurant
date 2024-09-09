@@ -31,9 +31,12 @@ class ClientReservationType extends AbstractType
                 'label' => 'Type de réservation',
             ])
             ->add('date_reservation', DateTimeType::class, [
-                'label' => 'Date de réservation',
-                'widget' => 'single_text',
+                'widget' => 'single_text', // Utilisation d'un seul champ pour date et heure
+                'html5' => true, // Utilisation du widget HTML5
+                'input' => 'datetime_immutable', // Assure que l'entrée est traitée comme DateTimeImmutable
+
             ])
+            
             ->add('nombre_personne', IntegerType::class, [
                 'label' => 'Nombre de personnes',
                 'required' => false,

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Employe;
 use App\Form\EmployeType;
+use App\Entity\Reservation;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,8 +56,37 @@ class EmployeController extends AbstractController
     #[Route('/employe/dashboard', name: 'employe_dashboard')]
     public function dashboard(): Response
     {
-        return $this->render('employe/dashboard.html.twig');
-    }
+        $reservations = $this->entityManager->getRepository(Reservation::class)->findAll();
+
+        return $this->render('blog/blogs.html.twig', [
+            'reservations' => $reservations,
+        ]);
+        }
+
+      /*  #[Route('/livreur/dashboard', name: 'livreur_dashboard')]
+
+        public function verifyCodeLivraison(Request $request): Response
+        {
+
+        $codeLivraison = $request->request->get('code_livraison');
+        $client = $this->entityManager->getRepository(Client::class)
+        ->findOneBy(['code_cli'=>$codeLivraison]);
+
+        if ($client) {
+            //code valide
+            $this->addFlash('success','Le code de livraison est valide');
+            # code...
+        } else {
+            $this->addFlash('danger','Le code de livraison est invalide');
+
+
+        }
+        return $this->redirectToRoute('livreur_dashboard'); 
+
+
+        } */
+
+        
 
 
 }

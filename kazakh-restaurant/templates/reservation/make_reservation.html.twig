@@ -5,7 +5,13 @@
 {% block body %}
 <div class="container">
     <h1>Reservation</h1>
-
+    {% for label, messages in app.flashes %}
+    <div class="notification is-{{ label }}">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
     {{ form_start(form, {'action': path('make_reservation'), 'attr': {'class': 'box'}}) }}
 
     {{ form_row(form.client_nom) }}

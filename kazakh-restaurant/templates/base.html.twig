@@ -32,10 +32,10 @@
                 <img src="{{ asset('logo/logo.png') }}" style="max-height: 70px;" alt="logo">
             </div>
             <div class="navbar-end">
-                <a href="" class="navbar-item">Accueil</a>
+                <a href="{{path('accueil')}}" class="navbar-item">Accueil</a>
                 <a href="" class="navbar-item">Menus</a>
-                <a href="" class="navbar-item">Blog</a>
-                <a href="#" class="navbar-item">Reservations</a>
+                <a href="{{path('blogs')}}" class="navbar-item">Blog</a>
+                <a href="{{path('make_reservation')}}" class="navbar-item">Reservations</a>
                 
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Langues</a>

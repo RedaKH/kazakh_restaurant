@@ -18,8 +18,8 @@ class Reservation
     #[ORM\Column(enumType: ReservationType::class)]
     private ?ReservationType $ReservationType = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_reservation = null;
+  
+
 
     #[ORM\Column(nullable: true)]
     private ?int $nombre_personne = null;
@@ -36,6 +36,9 @@ class Reservation
 
     #[ORM\Column(length: 255)]
     private ?string $plat = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $DateReservation = null;
 
 
     public function getId(): ?int
@@ -55,17 +58,7 @@ class Reservation
         return $this;
     }
 
-    public function getDateReservation(): ?\DateTimeInterface
-    {
-        return $this->date_reservation;
-    }
 
-    public function setDateReservation(\DateTimeInterface $date_reservation): static
-    {
-        $this->date_reservation = $date_reservation;
-
-        return $this;
-    }
 
     public function getNombrePersonne(): ?int
     {
@@ -123,6 +116,18 @@ class Reservation
     public function setPlat(string $plat): static
     {
         $this->plat = $plat;
+
+        return $this;
+    }
+
+    public function getDateReservation(): ?\DateTimeInterface
+    {
+        return $this->DateReservation;
+    }
+
+    public function setDateReservation(\DateTimeInterface $DateReservation): static
+    {
+        $this->DateReservation = $DateReservation;
 
         return $this;
     }
