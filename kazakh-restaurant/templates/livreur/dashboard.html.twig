@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Livreur{% endblock %}
+
+{% block body %}
+<div class="container has-text-centered">
+    <div class="field has-addons">
+        <div class="control">
+            <input class="input" type="text" placeholder="Rechercher une livraison">
+        </div>
+        <div class="control">
+            <button class="button is-info">Rechercher</button>
+        </div>
+    </div>
+    <div class="box">
+        <h1 class="title">Bienvenue {{ livraison.client.nom }} {{ livraison.client.prenom }}
+        </h1>
+        <h4 class="subtitle">Voici vos livraisons qui vous ont été assignées</h4>
+
+        <div class="table-container">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Nom du Client</th>
+                        <th>Date & Heure</th>
+                        <th>Adresse de Livraison</th>
+                        <th>Saisir le code</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for livraison in livraisons %}
+                    <tr>
+                        <td>{{ livraison.client.nom.prenom }}</td>
+                        <td>{{ livraison.dateReservation|date('d/m/Y H:i') }}</td>
+                        <td>{{ livraison.client.adresse }}</td>
+                        <td>{{ livraison.client.num_tel }}</td>
+
+                        <td>
+                            <form action="{{ path('valider_livraison') }}" method="POST">
+                                <input type="hidden" name="client_id" value="{{ livraison.client.id }}">
+                                <input class="input" type="text" name="code_livraison" placeholder="Code de Livraison" required>
+                                <button class="button is-primary is-small" type="submit">Valider</button>
+                            </form>
+                        </td>
+                        <td>{{ livraison.commande.commandeStatus|join(', ') }}</td>
+                        <td>
+                            <button class="button is-danger is-small">Annuler</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="{{ path('logout') }}" class="button is-link is-danger">Se déconnecter</a>
+</div>
+{% endblock %}

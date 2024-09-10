@@ -40,4 +40,15 @@ class ClientRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function validateCode(int $clientId,int $codecli):bool{
+    $client = $this->find($clientId);
+    if ($client && $client->getCodeClient()=== $codecli) {
+        return true;
+        # code...
+    } else {
+        return false;
+    }
+
+}
 }

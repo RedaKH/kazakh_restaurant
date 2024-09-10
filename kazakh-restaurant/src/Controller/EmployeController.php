@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Employe;
 use App\Form\EmployeType;
 use App\Entity\Reservation;
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +20,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class EmployeController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private ClientRepository $clientRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ClientRepository $clientRepository)
     {
         $this->entityManager = $entityManager;
-        
+        $this->clientRepository = $clientRepository;
     }
 
     #[Route('/admin/new', name: 'add_employe')]
@@ -46,10 +48,10 @@ class EmployeController extends AbstractController
 
             return $this->redirectToRoute('add_employe');
         }
-    
+
         return $this->render('employe/add_employe.html.twig', [
             'employe' => $employe,
-            'form'=> $form->createView()
+            'form' => $form->createView()
         ]);
     }
 
@@ -57,36 +59,32 @@ class EmployeController extends AbstractController
     public function dashboard(): Response
     {
         $reservations = $this->entityManager->getRepository(Reservation::class)->findAll();
+        $employe = $this->getUser();
 
-        return $this->render('blog/blogs.html.twig', [
+        return $this->render('employe/dashboard.html.twig', [
             'reservations' => $reservations,
+            'employe'=>$employe
         ]);
-        }
+    }
 
-      /*  #[Route('/livreur/dashboard', name: 'livreur_dashboard')]
 
-        public function verifyCodeLivraison(Request $request): Response
-        {
+    #[Route('/livreur/dashboard', name: 'livreur_dashboard')]
 
-        $codeLivraison = $request->request->get('code_livraison');
-        $client = $this->entityManager->getRepository(Client::class)
-        ->findOneBy(['code_cli'=>$codeLivraison]);
+    public function verifyCodeLivraison(Request $request): Response
+    {
+        $clientId = $request->request->get('client_id');
+        $codecli = $request->request->get('code_cli');
 
-        if ($client) {
-            //code valide
-            $this->addFlash('success','Le code de livraison est valide');
-            # code...
+        $isValid = $this->clientRepository->validateCode((int)$clientId, (int)$codecli);
+        if ($isValid) {
+            // si le code est valide donc mettre à jour la livraison
+
+            $this->addFlash('success', 'le code de livraison est valide. Livraison confirmée.');
         } else {
-            $this->addFlash('danger','Le code de livraison est invalide');
-
-
+            $this->addFlash('danger', 'Code de livraison invalide');
         }
-        return $this->redirectToRoute('livreur_dashboard'); 
 
 
-        } */
-
-        
-
-
+        return $this->redirectToRoute('livreur_dashboard');
+    }
 }

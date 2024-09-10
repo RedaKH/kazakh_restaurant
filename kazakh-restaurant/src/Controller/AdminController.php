@@ -27,7 +27,7 @@ class AdminController extends AbstractController
         //trouve les reservations qui n'ont pas été attribué et de type livraison
         $reservations = $reservationRepository->findby([
             'livreur_id' => null,
-            'ReservationType' => ReservationType::livraison
+            'ReservationType' => ReservationType::LIVRAISON
         ]);
 
         $livreurs = $employeRepository->findByRole(['ROLE_LIVREUR']);

@@ -24,8 +24,7 @@ class Reservation
     #[ORM\Column(nullable: true)]
     private ?int $nombre_personne = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?Livreur $livreur_id = null;
+ 
 
     #[ORM\ManyToOne(inversedBy: 'reservation_id')]
     #[ORM\JoinColumn(nullable: false)]
@@ -72,18 +71,7 @@ class Reservation
         return $this;
     }
 
-    public function getLivreurId(): ?Livreur
-    {
-        return $this->livreur_id;
-    }
-
-    public function setLivreurId(?Livreur $livreur_id): static
-    {
-        $this->livreur_id = $livreur_id;
-
-        return $this;
-    }
-
+  
     public function getCommande(): ?Commande
     {
         return $this->commande;

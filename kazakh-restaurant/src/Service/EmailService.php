@@ -1,6 +1,7 @@
 <?php
 namespace App\Service;
 
+use App\Entity\Reservation;
 use Swift;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
@@ -41,6 +42,27 @@ class EmailService{
             ->text("Bonjour $clientName,\n\nVoici votre code de livraison : $codeLivraison.\n\nMerci pour votre commande.");
 
         $this->mailer->send($emailMessage);
+
+
+    }
+
+    public function sendReservationCancellation(Reservation $reservation):void {
+        $email = (new Email())
+              ->from('noreply@beshbarmaqfood.com')
+              ->to($reservation->getClient()->getEmail())
+              ->subject('Annulation de votre réservation')
+              ->text(
+                sprintf(
+                    "Bonjour %s %s,\n\nNous sommes désolés de vous informer que votre réservation du %s a été annulée.\n\nN'hésitez pas à nous contacter pour toute question.",
+                    $reservation->getClient()->getPrenom(), 
+                    $reservation->getClient()->getNom(),    
+                    $reservation->getDateReservation()->format('d/m/Y H:i')
+   
+  
+
+                )
+                );
+                $this->mailer->send($email);
 
 
     }

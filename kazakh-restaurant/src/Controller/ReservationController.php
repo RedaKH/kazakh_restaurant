@@ -122,8 +122,48 @@ class ReservationController extends AbstractController
 
         }
 
+        
+
 
 
 
     }
+    #[Route('/reservation/accept/{id}', name: 'reservation_accept')]
+        public function accept($id): Response
+        {
+            $reservation = $this->reservationRepository->find($id);
+            if (!$reservation) {
+                 throw $this->createNotFoundException('La reservation n\'existe pas');
+
+            }
+
+
+            $this->entityManager->flush();
+            $this->addFlash('success', 'La réservation a été acceptée');
+    
+            return $this->redirectToRoute('employe_dashboard');
+        }
+
+
+
+        #[Route('/reservation/cancel/{id}', name: 'reservation_cancel')]
+        public function cancel($id): Response
+        {
+            $reservation = $this->reservationRepository->find($id);
+            if (!$reservation) {
+                 throw $this->createNotFoundException('La reservation n\'existe pas');
+
+            }
+
+
+            $this->emailService->sendReservationCancellation($reservation);
+            $this->entityManager->remove($reservation);
+
+            $this->entityManager->flush();
+            $this->addFlash('success', 'La réservation a été annulé');
+    
+            return $this->redirectToRoute('employe_dashboard');
+        }
+
+        
 }

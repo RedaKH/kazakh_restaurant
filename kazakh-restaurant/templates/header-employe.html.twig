@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
+    <title>{% block title %}Mon Application{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+            <div class="navbar-start">
+                <img src="{{ asset('assets/logo/logo.png') }}" style="max-height: 70px;" alt="Logo">
+            </div>
+            <div class="navbar-end">
+                <a href="{{ path('accueil') }}" class="navbar-item">Accueil</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+
+        </div>
+    </footer>
+</body>
+</html>
