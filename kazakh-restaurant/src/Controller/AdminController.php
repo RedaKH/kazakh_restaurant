@@ -24,40 +24,37 @@ class AdminController extends AbstractController
     #[Route('/admin/assigner-livraison', name: 'app_admin')]
     public function assignerLivraison(Request $request, ReservationRepository $reservationRepository, EmployeRepository $employeRepository): Response
     {
-        //trouve les reservations qui n'ont pas été attribué et de type livraison
-        $reservations = $reservationRepository->findby([
+        // Trouve les réservations qui n'ont pas été attribuées et sont de type livraison
+        $reservations = $reservationRepository->findBy([
             'livreur_id' => null,
             'ReservationType' => ReservationType::LIVRAISON
         ]);
 
-        $livreurs = $employeRepository->findByRole(['ROLE_LIVREUR']);
+        // Trouve les employés ayant le rôle de livreur
+        $livreurs = $employeRepository->findByRole('ROLE_LIVREUR');
 
         if ($request->isMethod('POST')) {
             $reservationID = $request->request->get('reservation_id');
-            $livreurID = $request->request->get('livreur_id');
+            $livreurID = $request->request->get('employe_id');
 
             $reservation = $reservationRepository->find($reservationID);
-            $livreur = $employeRepository->find($livreurID);
 
-            if ($reservation && $livreur) {
-                $reservation->setLivreurID($livreur);
+            if ($reservation && $livreurID) {
+                $reservation->setLivreurId($livreurID);  // Assigne l'ID du livreur
 
-                $this->entityManager->flush();
+                $this->entityManager->flush(); 
                 $this->addFlash('success', 'Livreur assigné avec succès');
-                return $this->redirectToRoute('assigner_livraison');
-                # code...
+                return $this->redirectToRoute('app_admin');
             } else {
                 $this->addFlash('danger', 'Une erreur est survenue lors de l\'assignation.');
             }
-
-
-            # code...
         }
-
 
         return $this->render('admin/dashboard_livraison.html.twig', [
             'reservations' => $reservations,
             'livreurs' => $livreurs
         ]);
     }
+    
+    
 }

@@ -1,0 +1,37 @@
+{% extends 'header-employe.html.twig' %}
+
+{% block title %} Historique des réservations {% endblock %}
+{% block body %}
+    
+<h1 class="is-1">Historique des réservations</h1>
+
+<table class=" table is-striped">
+
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Email</th>
+            <th>Date de réservation</th>
+            <th>Date d'acceptation</th>
+            <th>Type de réservation</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in history %}
+            
+        <tr>
+            <td>{{reservation.clientName}}</td>
+            <td>{{reservation.clientEmail}}</td>
+            <td>{{reservation.dateReservation|date('m/d/Y H:i')}}</td>
+            <td>{{reservation.dateAccepted|date('m/d/Y H:i')}}</td>
+            <td>{{reservation.reservationType}}</td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+</table>
+{% endblock  %}
+

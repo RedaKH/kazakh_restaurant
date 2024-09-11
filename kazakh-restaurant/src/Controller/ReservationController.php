@@ -8,9 +8,12 @@ use App\Entity\Reservation;
 use App\Enum\CommandeStatus;
 use App\Enum\ReservationType;
 use App\Service\EmailService;
+use App\Entity\ReservationHistory;
 use App\Form\ClientReservationType;
+use App\Repository\ReservationHistoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ReservationRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,12 +24,20 @@ class ReservationController extends AbstractController
     private EntityManagerInterface $entityManager;
     private $emailService;
     private $reservationRepository;
+    private $reservationHistoryRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, EmailService $emailService, ReservationRepository $reservationRepository)
+    public function __construct(EntityManagerInterface $entityManager, 
+    EmailService $emailService, 
+    ReservationRepository $reservationRepository 
+    ,
+    ReservationHistoryRepository $reservationHistoryRepository // Injectez le repository ici
+
+    )
     {
         $this->entityManager = $entityManager;
         $this->emailService = $emailService;
         $this->reservationRepository = $reservationRepository;
+        $this->reservationHistoryRepository = $reservationHistoryRepository;
     }
 
     #[Route('/make_reservation', name: 'make_reservation', methods: ['GET', 'POST'])]
@@ -137,9 +148,27 @@ class ReservationController extends AbstractController
 
             }
 
+         //Enregistrer dans l'historique
+         $reservationHistory = new ReservationHistory();
+         $reservationHistory->setClientName($reservation->getClient()->getNom().' '.$reservation->getClient()->getPrenom());
+         $reservationHistory->setClientEmail($reservation->getClient()->getEmail());
+         $reservationHistory->setDateReservation($reservation->getDateReservation());
+         $reservationHistory->setDateAccepted(new \DateTime()); //date actuelle
+         $reservationHistory->setReservationType($reservation->getReservationType()->value);
 
+         $this->entityManager->persist($reservationHistory);
+
+
+
+         
             $this->entityManager->flush();
             $this->addFlash('success', 'La réservation a été acceptée');
+
+            //supprime la reservation original
+            $this->entityManager->remove($reservation);
+
+            $this->entityManager->flush();
+
     
             return $this->redirectToRoute('employe_dashboard');
         }
@@ -164,6 +193,20 @@ class ReservationController extends AbstractController
     
             return $this->redirectToRoute('employe_dashboard');
         }
+
+        #[Route('/reservation/history', name: 'reservation_history')]
+        public function history(): Response
+        {
+            $history = $this->reservationHistoryRepository->findAll();
+
+            return $this->render('reservation/history.html.twig',[
+                'history'=>$history
+            ]);
+            
+    
+        }
+
+
 
         
 }

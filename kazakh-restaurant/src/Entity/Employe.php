@@ -42,9 +42,16 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'Author')]
     private Collection $blogs;
 
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'employe')]
+    private Collection $reservations;
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
 
@@ -198,6 +205,8 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+   
 
 
     

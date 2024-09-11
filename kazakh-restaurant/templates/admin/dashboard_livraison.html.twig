@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord des Livraisons{% endblock %}
+
+{% block body %}
+    <div class="container has-text-centered">
+        <div class="field has-addons">
+            <div class="control">
+                <input class="input" type="text" placeholder="Rechercher une livraison">
+            </div>
+            <div class="control">
+                <button class="button is-info">Rechercher</button>
+            </div>
+        </div>
+        <div class="box">
+            <h1 class="title">Tableau de Bord des Livraisons</h1>
+            <div class="table-container">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom du Client</th>
+                            <th>Date & Heure</th>
+                            <th>Adresse de Livraison</th>
+                            <th>Livreur Assigné</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.client.nom }} {{ reservation.client.prenom }}</td>
+                            <td>{{ reservation.dateReservation|date('d/m/Y H:i') }}</td>
+                            <td>{{ reservation.client.adresse }} {{ reservation.client.ville }} {{ reservation.client.codepostal }}</td>
+                            <td>
+                                <select name="livreur_id" id="livreur_id_{{ reservation.id }}">
+                                    <option value="">Sélectionnez un livreur</option>
+                                    {% for livreur in livreurs %}
+                                        <option value="{{ livreur.id }}">{{ livreur.nom }} {{ livreur.prenom }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                {% for status in reservation.commande.commandeStatus %}
+                                    {{ status.value }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            
+                            
+                            <td>
+                                <button class="button is-danger is-small">Annuler</button>
+                                <button class="button is-success is-small">Confirmer Livraison</button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="8">Aucune réservation trouvée.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

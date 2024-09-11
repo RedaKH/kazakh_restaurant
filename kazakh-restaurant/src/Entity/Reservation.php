@@ -39,6 +39,11 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $DateReservation = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $livreur_id = null;
+
+
+
 
     public function getId(): ?int
     {
@@ -119,6 +124,20 @@ class Reservation
 
         return $this;
     }
+
+    public function getLivreurId(): ?int
+    {
+        return $this->livreur_id;
+    }
+
+    public function setLivreurId(?int $livreur_id): static
+    {
+        $this->livreur_id = $livreur_id;
+
+        return $this;
+    }
+
+   
 
 
 }

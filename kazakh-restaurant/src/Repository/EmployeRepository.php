@@ -40,4 +40,20 @@ class EmployeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+/**
+     * Retourne tous les employés ayant un rôle spécifique.
+     */
+
+     public function findByRole(string $Role) : array {
+
+        $query = $this->createQueryBuilder('e')
+        ->andWhere('e.roles LIKE :role')
+        ->setParameter('role','%"'.$Role.'"%')
+        ->getQuery()
+        ->getResult();
+
+        return $query;
+        
+     }
 }
