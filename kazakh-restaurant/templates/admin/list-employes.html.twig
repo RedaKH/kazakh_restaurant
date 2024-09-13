@@ -1,0 +1,55 @@
+{% extends 'header-employe.html.twig' %}
+
+{% block title %}Liste des Employés{% endblock %}
+
+{% block body %}
+<div class="container has-text-centered">
+
+    <div class="box">
+        <h1 class="title">Liste des Employés</h1>
+        <h4 class="subtitle">Gérez les employés de votre établissement</h4>
+
+        <div class="table-container">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employe in employes %}
+                    <tr>
+                        <td>{{ employe.nom }}</td>
+                        <td>{{ employe.prenom }}</td>
+                        <td>{{ employe.email }}</td>
+                        <td>{{ employe.telephone }}</td>
+                        <td>
+                            {% for role in employe.roles %}
+                                {{ role|trans }}
+                            {% else %}
+                                Aucun rôle assigné
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{{ path('employe_edit', {'id': employe.id}) }}" class="button is-info is-small">Modifier</a>
+                            <form action="{{ path('employe_delete', {'id': employe.id}) }}" method="post" style="display:inline-block;">
+                                <button type="submit" class="button is-danger is-small">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Aucun employé trouvé.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

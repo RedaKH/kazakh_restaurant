@@ -32,11 +32,18 @@ class Commande
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
 
+    /**
+     * @var Collection<int, ReservationHistory>
+     */
+    #[ORM\OneToMany(targetEntity: ReservationHistory::class, mappedBy: 'Commande')]
+    private Collection $reservationHistories;
+
 
 
     public function __construct()
     {
         $this->reservation_id = new ArrayCollection();
+        $this->reservationHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +108,36 @@ class Commande
     public function setDateCommande(\DateTimeInterface $date_commande): static
     {
         $this->date_commande = $date_commande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationHistory>
+     */
+    public function getReservationHistories(): Collection
+    {
+        return $this->reservationHistories;
+    }
+
+    public function addReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if (!$this->reservationHistories->contains($reservationHistory)) {
+            $this->reservationHistories->add($reservationHistory);
+            $reservationHistory->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if ($this->reservationHistories->removeElement($reservationHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationHistory->getCommande() === $this) {
+                $reservationHistory->setCommande(null);
+            }
+        }
 
         return $this;
     }

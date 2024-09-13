@@ -1,0 +1,61 @@
+{% extends 'header-employe.html.twig' %}
+
+{% block title %}Nouvel Employé{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un Nouvel Employé</h1>
+
+    {{ form_start(form) }}
+
+    <div class="field">
+        {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.nom, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.prenom, 'Prénom', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.prenom, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.email, 'Email', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.email, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.telephone, 'Téléphone', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.telephone, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.roles, 'Rôles', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            <div class="select is-fullwidth">
+                {{ form_widget(form.roles) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.password, 'Mot de passe', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.password, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            {{ form_widget(form.save, {'attr': {'class': 'button is-primary'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

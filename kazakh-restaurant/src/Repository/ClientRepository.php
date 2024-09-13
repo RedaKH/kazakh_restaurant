@@ -41,14 +41,25 @@ class ClientRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-public function validateCode(int $clientId,int $codecli):bool{
-    $client = $this->find($clientId);
-    if ($client && $client->getCodeClient()=== $codecli) {
-        return true;
-        # code...
-    } else {
-        return false;
-    }
+public function validateCode(int $clientId, int $codecli): bool
+{
+    $qb = $this->createQueryBuilder('c')
+    ->select('c.id')
+    ->where('c.id = :clientId')
+    ->andWhere('c.code_client = :codecli')
+    ->andWhere('c.code_client IS NOT NULL')  // S'assure que code_client n'est pas null
+    ->setParameter('clientId',$clientId)
+    ->setParameter('codecli',$codecli)
+    ->getQuery();
+
+    //executer la requete pour voir si le  client et le code existe
+    $result = $qb->getOneOrNullResult();
+
+    return $result !==null;
+
+
 
 }
+
+
 }

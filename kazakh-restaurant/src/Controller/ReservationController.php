@@ -154,6 +154,9 @@ class ReservationController extends AbstractController
          $reservationHistory->setClientEmail($reservation->getClient()->getEmail());
          $reservationHistory->setDateReservation($reservation->getDateReservation());
          $reservationHistory->setDateAccepted(new \DateTime()); //date actuelle
+         $reservationHistory->setPlat($reservation->getPlat());
+         $reservationHistory->setEmploye($reservation->getLivreur());
+         $reservationHistory->setCommande($reservation->getCommande());
          $reservationHistory->setReservationType($reservation->getReservationType()->value);
 
          $this->entityManager->persist($reservationHistory);

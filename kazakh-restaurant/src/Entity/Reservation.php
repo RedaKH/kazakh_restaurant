@@ -39,8 +39,12 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $DateReservation = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $livreur_id = null;
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Employe $livreur = null;
+    
+
+
 
 
 
@@ -125,17 +129,21 @@ class Reservation
         return $this;
     }
 
-    public function getLivreurId(): ?int
+    public function getLivreur(): ?Employe
     {
-        return $this->livreur_id;
+        return $this->livreur;
     }
 
-    public function setLivreurId(?int $livreur_id): static
+    public function setLivreur(?Employe $livreur): static
     {
-        $this->livreur_id = $livreur_id;
+        $this->livreur = $livreur;
 
         return $this;
     }
+
+
+
+
 
    
 

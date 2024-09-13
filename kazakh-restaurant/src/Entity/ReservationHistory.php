@@ -29,6 +29,15 @@ class ReservationHistory
     #[ORM\Column(length: 255)]
     private ?string $ReservationType = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $plat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservationHistories')]
+    private ?Employe $Employe = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservationHistories')]
+    private ?Commande $Commande = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +101,42 @@ class ReservationHistory
     public function setReservationType(string $ReservationType): static
     {
         $this->ReservationType = $ReservationType;
+
+        return $this;
+    }
+
+    public function getPlat(): ?string
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(string $plat): static
+    {
+        $this->plat = $plat;
+
+        return $this;
+    }
+
+    public function getEmploye(): ?Employe
+    {
+        return $this->Employe;
+    }
+
+    public function setEmploye(?Employe $Employe): static
+    {
+        $this->Employe = $Employe;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->Commande;
+    }
+
+    public function setCommande(?Commande $Commande): static
+    {
+        $this->Commande = $Commande;
 
         return $this;
     }
