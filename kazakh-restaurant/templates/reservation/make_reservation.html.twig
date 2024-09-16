@@ -1,31 +1,105 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Effectuer une reservation{% endblock %}
+{% block title %}Effectuer une réservation{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1>Reservation</h1>
+    <h1 class="title is-1  has-text-centered">Réservation</h1>
+
     {% for label, messages in app.flashes %}
-    <div class="notification is-{{ label }}">
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    </div>
-{% endfor %}
+        <div class="notification is-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
     {{ form_start(form, {'action': path('make_reservation'), 'attr': {'class': 'box'}}) }}
 
-    {{ form_row(form.client_nom) }}
-    {{ form_row(form.client_prenom) }}
-    {{ form_row(form.client_email) }}
-    {{ form_row(form.client_adresse) }}
-    {{ form_row(form.client_ville) }}
-    {{ form_row(form.client_code_postal) }}
-    {{ form_row(form.client_num_tel) }}
-    {{ form_row(form.date_reservation) }}
-    {{ form_row(form.ReservationType) }}
-    {{ form_row(form.nombre_personne) }}
-    {{ form_row(form.plat) }}
-    {{ form_row(form.submit) }}
+    <div class="field">
+        {{ form_label(form.client_nom, 'Nom', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_nom, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_prenom, 'Prénom', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_prenom, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_email, 'Email', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_email, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_adresse, 'Adresse', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_adresse, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_ville, 'Ville', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_ville, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_code_postal, 'Code Postal', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_code_postal, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.client_num_tel, 'Numéro de téléphone', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.client_num_tel, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.date_reservation, 'Date de Réservation', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.date_reservation, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.ReservationType, 'Type de Réservation', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            <div class="select is-fullwidth">
+                {{ form_widget(form.ReservationType) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.nombre_personne, 'Nombre de personnes', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.nombre_personne, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.plat, 'Plat', {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.plat, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            {{ form_widget(form.submit, {'attr': {'class': 'button is-primary'}}) }}
+        </div>
+    </div>
 
     {{ form_end(form) }}
 </div>

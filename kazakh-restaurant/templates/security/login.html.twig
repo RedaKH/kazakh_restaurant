@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-    <title>Connexion</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
 <div class="container">
     <div class="columns is-centered">
         <div class="column is-one-third">
@@ -37,6 +32,4 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

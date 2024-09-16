@@ -8,12 +8,66 @@
 </head>
 <body>
     <header>
-        <nav class="navbar" role="navigation" aria-label="dropdown navigation">
-            <div class="navbar-start">
-                <img src="{{ asset('assets/logo/logo.png') }}" style="max-height: 70px;" alt="Logo">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{{ path('accueil') }}">
+                    <img src="{{ asset('logo/logo.png') }}" style="max-height: 70px;" alt="logo">
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-            <div class="navbar-end">
-                <a href="{{ path('accueil') }}" class="navbar-item">Accueil</a>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a href="{{ path('accueil') }}" class="navbar-item">Accueil</a>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('employe_dashboard') }}" class="navbar-item">Tableau de bord</a>
+
+                      
+                        <a class="navbar-item" href="{{ path('add_employe') }}">
+                            Ajouter un employé
+                        </a>
+                        <a class="navbar-item" href="{{ path('app_admin') }}">
+                            Assigner une livraison
+                        </a>
+                        <a class="navbar-item" href="{{ path('employe_list') }}">
+                        Liste des employés
+                        </a>
+                        <a class="navbar-item" href="{{ path('reservation_history') }}">
+                            Historique des réservations
+                            </a>
+
+                            <a class="navbar-item" href="{{ path('make_blog') }}">
+                                Ecrire un blog
+                                </a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_EMPLOYE') %}
+                    <a href="{{ path('employe_dashboard') }}" class="navbar-item">Tableau de bord</a>
+
+                    <a class="navbar-item" href="{{ path('reservation_history') }}">
+                        Historique des réservations
+                        </a>
+                        <a class="navbar-item" href="{{ path('make_blog') }}">
+                            Ecrire un blog
+                            </a>
+                        <a class="navbar-item" href="{{ path('app_admin') }}"></a>
+                            Assigner une livraison
+                        </a>
+                        {% endif %}
+ 
+
+                    {% if is_granted('ROLE_LIVREUR') %}
+                       
+                    {% endif %}
+                </div>
+
+              
             </div>
         </nav>
     </header>
@@ -24,8 +78,10 @@
 
     <footer class="footer">
         <div class="content has-text-centered">
-
+            <a href="{{path('app_logout')}}">Se déconnecter</a>
         </div>
     </footer>
+
+    
 </body>
 </html>

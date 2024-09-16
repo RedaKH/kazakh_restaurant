@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 <main>
@@ -29,15 +29,7 @@
                 <div class="column is-two-thirds">
                     <h2 class="title is-2">Qui nous sommes?</h2>
                     <p>
-                        Bienvenue chez Besharmaq Food, votre destination pour découvrir la cuisine authentique du Kazakhstan en plein cœur de la ville. Nous sommes fiers de vous offrir une expérience culinaire unique, enracinée dans les traditions kazakhes.
-
-                        Chez Besharmaq Food, nous célébrons la culture et l'hospitalité kazakhes avec chaque plat. Notre chef, originaire d'Almaty, utilise des recettes familiales et des ingrédients frais, souvent importés directement du Kazakhstan.
-
-                        Découvrez des plats traditionnels comme le beshbarmak, un ragoût de viande servi avec des nouilles maison, ou nos samsas, des feuilletés croustillants farcis à la viande et aux épices. Ne manquez pas de goûter notre shubat, un lait de chamelle fermenté rafraîchissant.
-
-                        Besharmaq Food est un lieu de rencontre et de partage. Notre décor chaleureux et accueillant, inspiré des motifs et artefacts traditionnels, vous fera sentir comme chez vous. Nous croyons que la nourriture rapproche les gens et nous sommes ravis de vous accueillir pour célébrer des moments spéciaux ou simplement passer une soirée agréable.
-
-                        Rejoignez-nous pour un voyage culinaire au cœur du Kazakhstan. Chez Besharmaq Food, nous sommes bien plus qu'un restaurant – nous sommes une fenêtre sur le Kazakhstan, un hommage vivant à nos traditions et une promesse de saveurs mémorables.
+                        Bienvenue chez Besharmaq Food, votre destination pour découvrir la cuisine authentique du Kazakhstan en plein cœur de la ville...
                     </p>
                 </div>
                 <div class="column">
@@ -59,7 +51,7 @@
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="livraison.html">En savoir plus</a>
+                                <a href="{{ path('livraison') }}">En savoir plus</a>
                             </p>
                         </footer>
                     </div>
@@ -73,7 +65,7 @@
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="privatisation.html">En savoir plus</a>
+                                <a href="{{ path('privatisation') }}">En savoir plus</a>
                             </p>
                         </footer>
                     </div>
@@ -87,7 +79,7 @@
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="emporter.html">En savoir plus</a>
+                                <a href="{{ path('emporter') }}">En savoir plus</a>
                             </p>
                         </footer>
                     </div>
@@ -101,7 +93,7 @@
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="surplace.html">En savoir plus</a>
+                                <a href="{{ path('surplace') }}">En savoir plus</a>
                             </p>
                         </footer>
                     </div>
@@ -112,44 +104,33 @@
 
     <section class="section blog" data-aos="zoom-in-up" data-aos-offset="700" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Notre Blog</h1>
-            <div class="columns">
-                <div class="column is-half">
-                    <div class="media">
-                        <figure class="media-left">
-                            <p class="image is-128x128">
-                                <img src="{{ asset('/plats/airag-drink.jpg') }}" alt="Airag">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p class="has-text-weight-bold">L'airag recette typique d'Asie Central</p>
-                                <p>Comment préparer l'airag?</p>
-                            </div>
-                            <a href="blog_airag.html">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="title">Notre Blog</h1>
 
-                <div class="column is-half">
-                    <div class="media">
-                        <figure class="media-left">
-                            <p class="image is-128x128">
-                                <img src="{{ asset('airag-drink.jpg') }}" alt="Airag">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p class="has-text-weight-bold">L'airag recette typique d'Asie Central</p>
-                                <p>Comment préparer l'airag?</p>
+            <div class="columns is-multiline">
+                {% for blog in blogs %}
+                    <div class="column is-half">
+                        <div class="media">
+                            <figure class="media-left">
+                                <p class="image is-128x128">
+                                    <img src="{{ asset('uploads/' ~ blog.image) }}" alt="{{ blog.title }}">
+                                </p>
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p class="has-text-weight-bold">{{ blog.title }}</p>
+                                    <p>{{ blog.content|slice(0, 100)|raw }}...</p>
+                                    <time datetime="{{ blog.createdAt|date('Y-m-d') }}">{{ blog.createdAt|date('Y-m-d') }}</time>
+                                </div>
+                                <a href="{{ path('blog_read', {id: blog.id}) }}" class="button is-link is-small">En savoir plus</a>
                             </div>
-                            <a href="blog_airag.html">En savoir plus</a>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
+
         </div>
     </section>
+
 
     <section class="section temoignages" data-aos="zoom-in-up" data-aos-offset="800" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
@@ -168,8 +149,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Répéter ce bloc pour d'autres témoignages -->
             </div>
         </div>
     </section>

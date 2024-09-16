@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service de Livraison - Beshbarmaq Food{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <div class="breadcrumb-container mt-4">
+            <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                    <li class="is-active"><a href="{{ path('livraison') }}" aria-current="page">Livraison</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="livraison section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-half">
+                        <div class="content">
+                            <p><strong>Beshbarmaq Food</strong>, restaurant traditionnel kazakh, vous propose un grand choix de plats disponibles sur commande avec service de livraison.</p>
+                            <p>Que ce soit pour un évènement ou pour déguster une spécialité kazakhe tranquillement chez vous, vous pouvez compter sur nous pour livrer vos plats.</p>
+                            <p>Avec <strong>Beshbarmaq Food</strong>, vous n'avez rien à préparer ! Appelez-nous, passez votre commande et nous nous occupons du reste. Nous nous déplaçons au plus vite pour livrer vos plats dans les meilleurs délais afin que vous puissiez profiter d'un bon repas chaud typiquement kazakh.</p>
+                            <p>Le service est disponible <strong>à partir de 25 euros</strong> sur des zones limitées.</p>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <figure class="image is-4by3">
+                            <img src="{{ asset('Restaurant-Online-Food-Delivery-1.webp') }}" alt="Beshbarmaq Food Livraison">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

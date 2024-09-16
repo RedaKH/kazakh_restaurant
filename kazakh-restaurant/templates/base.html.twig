@@ -33,18 +33,19 @@
             </div>
             <div class="navbar-end">
                 <a href="{{path('accueil')}}" class="navbar-item">Accueil</a>
-                <a href="" class="navbar-item">Menus</a>
+                <a href="{{path('menu')}}" class="navbar-item">Menus</a>
                 <a href="{{path('blogs')}}" class="navbar-item">Blog</a>
                 <a href="{{path('make_reservation')}}" class="navbar-item">Reservations</a>
                 
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">Langues</a>
                     <div class="navbar-dropdown">
-                        <a href="#" class="navbar-item">Français</a>
-                        <a href="#" class="navbar-item">English</a>
-                        <a href="#" class="navbar-item">қазақша</a>
+                        <a href="{{ path('change_locale', {locale: 'fr'}) }}" class="navbar-item">Français</a>
+                        <a href="{{ path('change_locale', {locale: 'en'}) }}" class="navbar-item">English</a>
+                        <a href="{{ path('change_locale', {locale: 'kk'}) }}" class="navbar-item">қазақша</a>
                     </div>
                 </div>
+                
             </div>
         </nav>
         {% endblock %}
@@ -72,7 +73,11 @@
                     <p>13 rue Tartampion 75000 Paris</p>
                 </div>
             </div>
-            <a href="">Connexion employés</a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('login') }}" >Connexion employés</a>
+            {% endif %}
             <p>Fait par Réda Khaldi 2024</p>
         </div>
         {% endblock %}

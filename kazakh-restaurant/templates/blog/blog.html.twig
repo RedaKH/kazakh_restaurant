@@ -1,58 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+{% extends "base.html.twig" %}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
-    <title>Document</title>
-</head>
-<body>
+{% block title %}{{ blog.title }}{% endblock %}
 
-
-    <main>
-        <div class="container has-text-centered">
-            <div class="box">
-                <div class="content is-normal">
-                    <figure>
-                        <img src="{{ asset('uploads/' ~ blog.image) }}" alt="{{ blog.title }}">
-    
-    
-                    </figure>
-                    <h1>{{blog.title}}</h1>
-                    <p> 
-                        {{blog.content|raw}}
-                    </p>
-                    <h2>{{blog.author.nom}}</h2>
-
-                    <time datetime="{{ blog.createdAt|date('Y-m-d') }}">{{ blog.createdAt|date('d/m/Y') }}</time>
-
-                  
-                  </div>
-
+{% block body %}
+<main>
+    <div class="container has-text-centered">
+        <div class="box">
+            <div class="content is-normal">
+                <figure class="image">
+                    <img src="{{ asset('uploads/' ~ blog.image) }}" alt="{{ blog.title }}">
+                </figure>
+                <h1 class="title">{{ blog.title }}</h1>
+                <p>
+                    {{ blog.content|raw }}
+                </p>
+                <h2 class="subtitle">Écrit par : {{ blog.author.nom }}</h2>
+                <time datetime="{{ blog.createdAt|date('Y-m-d') }}">{{ blog.createdAt|date('d/m/Y') }}</time>
             </div>
-           
         </div>
-
-
-    </main>
-
-
-    
-
-    
-</body>
-</html>
+    </div>
+</main>
+{% endblock %}
