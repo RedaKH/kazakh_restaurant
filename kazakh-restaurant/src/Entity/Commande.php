@@ -24,11 +24,7 @@ class Commande
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'commande')]
     private Collection $reservation_id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $plat = null;
 
-    #[ORM\Column]
-    private ?int $qte = null;
 
     #[ORM\Column(type: Types::SIMPLE_ARRAY, enumType: CommandeStatus::class)]
     private array $commandeStatus = [];
@@ -36,10 +32,18 @@ class Commande
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
 
+    /**
+     * @var Collection<int, ReservationHistory>
+     */
+    #[ORM\OneToMany(targetEntity: ReservationHistory::class, mappedBy: 'Commande')]
+    private Collection $reservationHistories;
+
+
 
     public function __construct()
     {
         $this->reservation_id = new ArrayCollection();
+        $this->reservationHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,29 +81,9 @@ class Commande
         return $this;
     }
 
-    public function getPlat(): ?string
-    {
-        return $this->plat;
-    }
+   
 
-    public function setPlat(string $plat): static
-    {
-        $this->plat = $plat;
-
-        return $this;
-    }
-
-    public function getQte(): ?int
-    {
-        return $this->qte;
-    }
-
-    public function setQte(int $qte): static
-    {
-        $this->qte = $qte;
-
-        return $this;
-    }
+   
 
     /**
      * @return CommandeStatus[]
@@ -127,6 +111,37 @@ class Commande
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, ReservationHistory>
+     */
+    public function getReservationHistories(): Collection
+    {
+        return $this->reservationHistories;
+    }
+
+    public function addReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if (!$this->reservationHistories->contains($reservationHistory)) {
+            $this->reservationHistories->add($reservationHistory);
+            $reservationHistory->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if ($this->reservationHistories->removeElement($reservationHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationHistory->getCommande() === $this) {
+                $reservationHistory->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
 
  
 }

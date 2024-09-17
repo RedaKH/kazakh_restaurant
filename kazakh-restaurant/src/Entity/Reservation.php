@@ -18,18 +18,36 @@ class Reservation
     #[ORM\Column(enumType: ReservationType::class)]
     private ?ReservationType $ReservationType = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_reservation = null;
+  
+
 
     #[ORM\Column(nullable: true)]
     private ?int $nombre_personne = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reservations')]
-    private ?Livreur $livreur_id = null;
+ 
 
     #[ORM\ManyToOne(inversedBy: 'reservation_id')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commande $commande = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reserver')]
+    private ?Client $client = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $plat = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $DateReservation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Employe $livreur = null;
+    
+
+
+
+
+
 
     public function getId(): ?int
     {
@@ -48,17 +66,7 @@ class Reservation
         return $this;
     }
 
-    public function getDateReservation(): ?\DateTimeInterface
-    {
-        return $this->date_reservation;
-    }
 
-    public function setDateReservation(\DateTimeInterface $date_reservation): static
-    {
-        $this->date_reservation = $date_reservation;
-
-        return $this;
-    }
 
     public function getNombrePersonne(): ?int
     {
@@ -72,18 +80,7 @@ class Reservation
         return $this;
     }
 
-    public function getLivreurId(): ?Livreur
-    {
-        return $this->livreur_id;
-    }
-
-    public function setLivreurId(?Livreur $livreur_id): static
-    {
-        $this->livreur_id = $livreur_id;
-
-        return $this;
-    }
-
+  
     public function getCommande(): ?Commande
     {
         return $this->commande;
@@ -95,4 +92,60 @@ class Reservation
 
         return $this;
     }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getPlat(): ?string
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(string $plat): static
+    {
+        $this->plat = $plat;
+
+        return $this;
+    }
+
+    public function getDateReservation(): ?\DateTimeInterface
+    {
+        return $this->DateReservation;
+    }
+
+    public function setDateReservation(\DateTimeInterface $DateReservation): static
+    {
+        $this->DateReservation = $DateReservation;
+
+        return $this;
+    }
+
+    public function getLivreur(): ?Employe
+    {
+        return $this->livreur;
+    }
+
+    public function setLivreur(?Employe $livreur): static
+    {
+        $this->livreur = $livreur;
+
+        return $this;
+    }
+
+
+
+
+
+   
+
+
 }

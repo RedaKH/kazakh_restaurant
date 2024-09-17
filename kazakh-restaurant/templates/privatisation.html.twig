@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Privatisation - Beshbarmaq Food{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="breadcrumb-container mt-4">
+            <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                    <li class="is-active"><a href="{{ path('privatisation') }}" aria-current="page">Privatisation</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="privatisation section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-half">
+                        <div class="content">
+                            <p class="has-text-weight-semibold"><strong>Beshbarmaq Food</strong>, restaurant traditionnel kazakh, vous offre la possibilité de privatiser notre établissement pour vos événements privés.</p>
+                            <p>Que ce soit pour un mariage, une fête d'anniversaire, une réunion d'affaires ou tout autre événement spécial, notre équipe est à votre disposition pour créer une expérience culinaire inoubliable.</p>
+                            <p>En choisissant <strong>Beshbarmaq Food</strong>, vous bénéficiez d'un service complet. Contactez-nous, réservez notre restaurant et laissez-nous prendre soin de chaque détail. Nous veillons à ce que votre événement se déroule parfaitement et que vos invités savourent chaque moment.</p>
+                            <p>Situé au cœur de Paris, notre restaurant est l'endroit idéal pour célébrer vos moments importants. Notre chef, originaire d'Almaty, prépare avec passion des plats authentiques kazakhs qui raviront vos invités.</p>
+                            <p>Pour plus d'informations sur nos offres de privatisation et pour discuter de vos besoins spécifiques, n'hésitez pas à nous contacter. Nous sommes là pour vous aider à organiser un événement exceptionnel.</p>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <figure class="image is-4by3">
+                            <img src="{{ asset('tgi-fridays-drinks.jpeg') }}" alt="Privatisation Beshbarmaq Food">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

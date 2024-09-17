@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Assigner Livraison{% endblock %}
+
+{% block body %}
+    <div class="container has-text-centered">
+        <div class="field has-addons">
+            <div class="control">
+                <form action="{{ path('rechercher_assignation_livraison') }}" method="get">
+                    <input class="input" type="text" name="search" placeholder="Rechercher une réservation">
+                    <button class="button is-info">Rechercher</button>
+                </form>
+            </div>
+        </div>
+        <div class="box">
+            <h1 class="title">Assigner Livraison</h1>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="notification is-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <div class="table-container">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom du Client</th>
+                            <th>Date & Heure</th>
+                            <th>Adresse de Livraison</th>
+                            <th>Livreur Assigné</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td>{{ reservation.client.nom }} {{ reservation.client.prenom }}</td>
+                                <td>{{ reservation.dateReservation|date('d/m/Y H:i') }}</td>
+                                <td>{{ reservation.client.adresse }} {{ reservation.client.ville }} {{ reservation.client.codepostal }}</td>
+                                <td>
+                                    <form action="{{ path('app_admin') }}" method="post">
+                                        <div class="field">
+                                            <div class="control">
+                                                <div class="select">
+                                                    <select name="employe_id" required>
+                                                        <option value="">Sélectionnez un livreur</option>
+                                                        {% for livreur in livreurs %}
+                                                            <option value="{{ livreur.id }}">{{ livreur.nom }} {{ livreur.prenom }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </td>
+                                <td>
+                                    {% for status in reservation.commande.commandeStatus %}
+                                        {{ status.value }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <input type="hidden" name="reservation_id" value="{{ reservation.id }}">
+                                    <button type="submit" class="button is-success is-small">Assigner le livreur</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">Aucune réservation trouvée.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

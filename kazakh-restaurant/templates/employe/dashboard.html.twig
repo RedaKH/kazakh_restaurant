@@ -1,0 +1,70 @@
+{% extends 'header-employe.html.twig' %}
+
+{% block title %}Tableau de Bord Employé{% endblock %}
+
+{% block body %}
+<div class="container has-text-centered">
+
+    <div class="field has-addons">
+        <div class="control">
+            <form action="{{ path('rechercher_commande') }}" method="get">
+                <input class="input" type="text" name="search" placeholder="Rechercher une commande">
+                <button class="button is-info">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="box">
+        <h1 class="title">Bienvenue </h1>
+        <h4 class="subtitle">Voici les réservations de vos clients</h4>
+
+        <div class="table-container">
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse email</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Adresse</th>
+                        <th>Plat</th>
+                        <th>Type de réservation</th>
+                        <th>Date et Heure</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.client.nom }}</td>
+                        <td>{{ reservation.client.prenom }}</td>
+                        <td>{{ reservation.client.email }}</td>
+                        <td>{{ reservation.client.numTel }}</td>
+                        <td>{{ reservation.client.adresse }}</td>
+                        <td>{{ reservation.plat }}</td>
+                        <td>{{ reservation.ReservationType.value }}</td>
+                        <td>{{ reservation.dateReservation|date('Y-m-d H:i') }}</td>
+                        <td>
+                            {% if reservation.commande.commandeStatus is not empty %}
+                                {{ reservation.commande.commandeStatus[0].value }}
+                            {% else %}
+                                Aucun statut
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('reservation_accept', {'id': reservation.id}) }}" class="button is-success is-small">Accepter</a>
+                            <a href="{{ path('reservation_cancel', {'id': reservation.id}) }}" class="button is-danger is-small">Annuler</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="10">Aucune réservation trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

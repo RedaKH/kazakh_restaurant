@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'emporter_title'|trans }}{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <div class="breadcrumb-container mt-4">
+            <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{{ path('accueil') }}">{{ 'breadcrumb_home'|trans }}</a></li>
+                    <li class="is-active"><a href="{{ path('emporter') }}" aria-current="page">{{ 'breadcrumb_emporter'|trans }}</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="emporter section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-half">
+                        <div class="content">
+                            <p>{{ 'emporter_intro_1'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_2'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_3'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_4'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_5'|trans|raw }}</p>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <figure class="image is-4by3">
+                            <img src="{{ asset('doggy-bag.jpg') }}" alt="{{ 'emporter_image_alt'|trans }}">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

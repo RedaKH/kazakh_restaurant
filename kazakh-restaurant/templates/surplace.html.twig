@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'surplace_title'|trans }}{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <div class="breadcrumb-container mt-4">
+            <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{{ path('accueil') }}">{{ 'breadcrumb_home'|trans }}</a></li>
+                    <li class="is-active"><a href="{{ path('surplace') }}" aria-current="page">{{ 'breadcrumb_surplace'|trans }}</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="surplace section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-half">
+                        <div class="content">
+                            <p>{{ 'surplace_intro_1'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_2'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_3'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_4'|trans|raw }}</p>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <figure class="image is-4by3">
+                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="{{ 'surplace_image_alt'|trans }}">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

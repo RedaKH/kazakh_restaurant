@@ -42,9 +42,27 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Blog::class, mappedBy: 'Author')]
     private Collection $blogs;
 
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'livreur')]
+    private Collection $reservations;
+
+    /**
+     * @var Collection<int, ReservationHistory>
+     */
+    #[ORM\OneToMany(targetEntity: ReservationHistory::class, mappedBy: 'Employe')]
+    private Collection $reservationHistories;
+
+
+
+    
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+        $this->reservationHistories = new ArrayCollection();
     }
 
 
@@ -198,6 +216,74 @@ class Employe implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setLivreur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getLivreur() === $this) {
+                $reservation->setLivreur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationHistory>
+     */
+    public function getReservationHistories(): Collection
+    {
+        return $this->reservationHistories;
+    }
+
+    public function addReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if (!$this->reservationHistories->contains($reservationHistory)) {
+            $this->reservationHistories->add($reservationHistory);
+            $reservationHistory->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationHistory(ReservationHistory $reservationHistory): static
+    {
+        if ($this->reservationHistories->removeElement($reservationHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationHistory->getEmploye() === $this) {
+                $reservationHistory->setEmploye(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+
+  
+
+    
+
+   
 
 
     

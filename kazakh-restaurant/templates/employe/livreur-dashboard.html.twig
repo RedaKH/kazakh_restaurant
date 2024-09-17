@@ -1,0 +1,67 @@
+{% extends "header-employe.html.twig" %}
+
+{% block body %}
+    <div class="container has-text-centered">
+        <div class="field has-addons">
+            <div class="control">
+                <form action="{{ path('search_delivery') }}" method="get">
+                    <input class="input" type="text" name="search" placeholder="Rechercher une livraison" value="{{ app.request.get('search') }}">
+                    <button type="submit" class="button is-info">Rechercher</button>
+                </form>
+            </div>
+        </div>
+        <div class="box">
+            <h4 class="subtitle">Voici vos livraisons qui vous ont été assignées</h4>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="notification is-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <div class="table-container">
+                <table class="table is-striped is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Nom du Client</th>
+                            <th>Date & Heure</th>
+                            <th>Adresse de Livraison</th>
+                            <th>Saisir le code</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td>{{ reservation.client.nom }} {{ reservation.client.prenom }}</td>
+                                <td>{{ reservation.dateReservation|date('d/m/Y H:i') }}</td>
+                                <td>{{ reservation.client.adresse }}</td>
+                                <td>
+                                    <form action="{{ path('livreur_dashboard') }}" method="post">
+                                        <input type="text" name="code_cli" class="input" placeholder="Saisir le code">
+                                        <input type="hidden" name="client_id" value="{{ reservation.client.id }}">
+                                </td>
+                                <td>
+                                    {% for status in reservation.commande.commandeStatus %}
+                                        {{ status.value }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                        <button type="submit" class="button is-primary is-small">Valider la Livraison</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">Aucune livraison trouvée.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

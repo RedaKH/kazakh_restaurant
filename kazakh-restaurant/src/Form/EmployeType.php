@@ -32,10 +32,10 @@ class EmployeType extends AbstractType
                     'Employé' => 'ROLE_EMPLOYE',
                 ],
                 'multiple' => true,
-                'expanded' => false,
-                'attr' => ['class' => 'form-control'], // Ajoute une classe CSS si besoin
-
+                'expanded' => false, // Utilisation d'un select avec possibilité de sélection multiple
+                'attr' => ['class' => 'form-control select'], // Ajout d'une classe CSS pour styliser le select
             ])
+            
             ->add('password', PasswordType::class)
             ->add('save', SubmitType::class,[
                 'label' =>'Enregistrer']);

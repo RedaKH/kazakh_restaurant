@@ -23,8 +23,8 @@ security:
                 password_parameter: _password
                 success_handler: App\Security\CustomLoginSuccessHandler
             logout:
-                path: logout
-                target: /
+                path: app_logout
+                target: /login
 
            
 
