@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service sur Place - Beshbarmaq Food{% endblock %}
+{% block title %}{{ 'surplace_title'|trans }}{% endblock %}
 
 {% block body %}
 <main>
@@ -8,8 +8,8 @@
         <div class="breadcrumb-container mt-4">
             <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{{ path('accueil') }}">Accueil</a></li>
-                    <li class="is-active"><a href="{{ path('surplace') }}" aria-current="page">Sur place</a></li>
+                    <li><a href="{{ path('accueil') }}">{{ 'breadcrumb_home'|trans }}</a></li>
+                    <li class="is-active"><a href="{{ path('surplace') }}" aria-current="page">{{ 'breadcrumb_surplace'|trans }}</a></li>
                 </ul>
             </nav>
         </div>
@@ -19,15 +19,15 @@
                 <div class="columns is-multiline">
                     <div class="column is-half">
                         <div class="content">
-                            <p><strong>Beshbarmaq Food</strong>, restaurant traditionnel kazakh, vous invite à déguster nos spécialités sur place, dans un cadre chaleureux et accueillant.</p>
-                            <p>Que ce soit pour un déjeuner d'affaires ou un dîner en famille, nous vous offrons une expérience culinaire authentique, enracinée dans les traditions du Kazakhstan.</p>
-                            <p>Nos plats sont préparés avec soin par notre chef, originaire d'Almaty, et sont servis avec toute l'hospitalité kazakhe qui fait notre renommée.</p>
-                            <p>Pour réserver une table ou en savoir plus sur notre menu, n'hésitez pas à nous contacter.</p>
+                            <p>{{ 'surplace_intro_1'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_2'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_3'|trans|raw }}</p>
+                            <p>{{ 'surplace_intro_4'|trans|raw }}</p>
                         </div>
                     </div>
                     <div class="column is-half">
                         <figure class="image is-4by3">
-                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="Service sur place Beshbarmaq Food">
+                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="{{ 'surplace_image_alt'|trans }}">
                         </figure>
                     </div>
                 </div>

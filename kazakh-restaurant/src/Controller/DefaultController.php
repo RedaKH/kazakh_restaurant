@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Repository\BlogRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
@@ -60,5 +62,20 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+    #[Route(path: '/error_403', name: 'error')]
+
+    public function error_403(KernelInterface $kernel, Request $request): Response
+{
+    // Si l'environnement est "prod" et que l'utilisateur n'a pas les droits appropriés
+    if ($kernel->getEnvironment() === 'prod' && !$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_LIVREUR') && !$this->isGranted('ROLE_EMPLOYE')) {
+        throw $this->createAccessDeniedException();
+    }
+
+    // Logique de votre action
+
+    return new Response('Contenu de la page');
+}
+
 }
 

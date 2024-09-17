@@ -1,147 +1,146 @@
 {% extends "base.html.twig" %}
 
-
-{% block title %}Menus - Beshbarmaq Food{% endblock %}
+{% block title %}{{ 'menu_title'|trans }}{% endblock %}
 
 {% block body %}
 <main>
     <section class="section entrees" data-aos="fade-up">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Nos entrées</h1>
+            <h1 class="title is-1">{{ 'entrees_title'|trans }}</h1>
             <div class="columns">
                 <div class="column is-half">
                     <img src="{{ asset('plats/Uzbek-Samsa-1.jpg') }}" alt="Samsa">
                 </div>
                 <div class="column is-half">
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Samsa : Feuilletés fourrés à la viande, aux oignons et parfois aux courges.</h4>
+                        <h4 class="subtitle is-4">{{ 'samsa_description'|trans }}</h4>
                         <span>3.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Baurzaks : Petits beignets frits souvent servis avec du miel.</h4>
+                        <h4 class="subtitle is-4">{{ 'baurzaks_description'|trans }}</h4>
                         <span>2.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kurt : Boules de fromage séché, souvent servies en apéritif.</h4>
+                        <h4 class="subtitle is-4">{{ 'kurt_description'|trans }}</h4>
                         <span>2.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Zhaya : Tranches de viande de cheval séchée.</h4>
+                        <h4 class="subtitle is-4">{{ 'zhaya_description'|trans }}</h4>
                         <span>4.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Taba nan : Pain plat traditionnel souvent servi en accompagnement</h4>
+                        <h4 class="subtitle is-4">{{ 'taba_nan_description'|trans }}</h4>
                         <span>1.50€</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="section plats" data-aos="fade-left" data-aos-offset="300"
-    data-aos-easing="ease-in-sine">
+    
+    <section class="section plats" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Nos plats</h1>
+            <h1 class="title is-1">{{ 'plats_title'|trans }}</h1>
             <div class="columns">
                 <div class="column is-half">
-                    <img src="{{asset('plats/Beshbarmak-Kazakh-National-Dish-1000x800.jpg')}}" alt="Beshbarmak" srcset="">
+                    <img src="{{ asset('plats/Beshbarmak-Kazakh-National-Dish-1000x800.jpg') }}" alt="Beshbarmak">
                 </div>
                 <div class="column is-half">
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Beshbarmak : Plat national du Kazakhstan, fait de viande (généralement de l'agneau ou du bœuf) servie avec des nouilles larges et un bouillon.</h4>
+                        <h4 class="subtitle is-4">{{ 'beshbarmak_description'|trans }}</h4>
                         <span>8.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kazy : Saucisse de cheval traditionnellement servie en tranches fines.</h4>
+                        <h4 class="subtitle is-4">{{ 'kazy_description'|trans }}</h4>
                         <span>7.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kuurdak : Ragoût de viande de mouton, de bœuf ou de cheval avec des pommes de terre et des oignons.</h4>
+                        <h4 class="subtitle is-4">{{ 'kuurdak_description'|trans }}</h4>
                         <span>6.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Shashlik : Brochettes de viande grillées, souvent accompagnées de légumes.</h4>
+                        <h4 class="subtitle is-4">{{ 'shashlik_description'|trans }}</h4>
                         <span>5.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Plov : Plat de riz pilaf avec des morceaux de viande, des carottes, et des oignons.</h4>
+                        <h4 class="subtitle is-4">{{ 'plov_description'|trans }}</h4>
                         <span>7.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Lagman : Nouilles faites à la main servies avec une sauce épicée à base de viande et de légumes.</h4>
+                        <h4 class="subtitle is-4">{{ 'lagman_description'|trans }}</h4>
                         <span>6.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Manty : Grosses boulettes de pâte farcies de viande hachée et cuites à la vapeur.</h4>
+                        <h4 class="subtitle is-4">{{ 'manty_description'|trans }}</h4>
                         <span>5.00€</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="section desserts" data-aos="fade-up" data-aos-offset="500"
-    data-aos-easing="ease-in-sine" >
+
+    <section class="section desserts" data-aos="fade-up" data-aos-offset="500" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Nos desserts</h1>
+            <h1 class="title is-1">{{ 'desserts_title'|trans }}</h1>
             <div class="columns">
                 <div class="column is-half">
-                    <img src="{{asset('plats/Baursaki-680.jpg')}}" alt="Baursaki" srcset="">
+                    <img src="{{ asset('plats/Baursaki-680.jpg') }}" alt="Baursaki">
                 </div>
                 <div class="column is-half">
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Shelpek : Pain plat frit souvent servi avec du sucre ou du miel.</h4>
+                        <h4 class="subtitle is-4">{{ 'shelpek_description'|trans }}</h4>
                         <span>2.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Baursak : Beignets frits, souvent sucrés et servis en dessert.</h4>
+                        <h4 class="subtitle is-4">{{ 'baursak_description'|trans }}</h4>
                         <span>2.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kuyrdak : Gâteau fait avec des graines de tournesol et du miel.</h4>
+                        <h4 class="subtitle is-4">{{ 'kuyrdak_description'|trans }}</h4>
                         <span>3.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Chak-chak : Boules de pâte frites mélangées avec du miel et des noix.</h4>
+                        <h4 class="subtitle is-4">{{ 'chak_chak_description'|trans }}</h4>
                         <span>2.50€</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="section boissons" data-aos="fade-up" data-aos-offset="700"
-    data-aos-easing="ease-in-sine">
+
+    <section class="section boissons" data-aos="fade-up" data-aos-offset="700" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title">Nos boissons</h1>
+            <h1 class="title">{{ 'boissons_title'|trans }}</h1>
             <div class="columns">
                 <div class="column is-half">
-                    <img src="{{asset('plats/airag-drink.jpg')}}" alt="Boissons" srcset="">
+                    <img src="{{ asset('plats/airag-drink.jpg') }}" alt="Boissons">
                 </div>
                 <div class="column is-half">
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kumis : Lait de jument fermenté, boisson traditionnelle du Kazakhstan.</h4>
+                        <h4 class="subtitle is-4">{{ 'kumis_description'|trans }}</h4>
                         <span>3.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Shubat : Lait de chamelle fermenté.</h4>
+                        <h4 class="subtitle is-4">{{ 'shubat_description'|trans }}</h4>
                         <span>2.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Airan : Boisson à base de lait fermenté.</h4>
+                        <h4 class="subtitle is-4">{{ 'airan_description'|trans }}</h4>
                         <span>2.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kymyz : Une autre boisson lactée fermentée à base de lait de jument.</h4>
+                        <h4 class="subtitle is-4">{{ 'kymyz_description'|trans }}</h4>
                         <span>3.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Tchai : Thé traditionnel, souvent servi avec du lait et du sucre.</h4>
+                        <h4 class="subtitle is-4">{{ 'tchai_description'|trans }}</h4>
                         <span>1.50€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kompot : Boisson sucrée à base de fruits bouillis.</h4>
+                        <h4 class="subtitle is-4">{{ 'kompot_description'|trans }}</h4>
                         <span>2.00€</span>
                     </div>
                     <div class="menu-item">
-                        <h4 class="subtitle is-4">Kvass : Boisson fermentée à base de pain de seigle, légèrement alcoolisée.</h4>
+                        <h4 class="subtitle is-4">{{ 'kvass_description'|trans }}</h4>
                         <span>2.50€</span>
                     </div>
                 </div>

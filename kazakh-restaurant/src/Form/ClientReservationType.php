@@ -69,9 +69,18 @@ class ClientReservationType extends AbstractType
                 'mapped' => false,
                 'label' => 'Numéro de téléphone',
             ])
-            ->add('plat', TextType::class, [
-                'label' => 'Plat commandé',
-                'required' => false,
+            ->add('plat', ChoiceType::class, [
+                'choices'  => [
+                    'Beshbarmak' => 'beshbarmak',
+                    'Kazy' => 'kazy',
+                    'Kuurdak' => 'kuurdak',
+                    'Shashlik' => 'shashlik',
+                    'Plov' => 'plov',
+                    'Lagman' => 'lagman',
+                    'Manty' => 'manty',
+                ],
+                'label' => 'Choisissez votre plat',
+                'attr' => ['class' => 'select is-fullwidth'],
             ])
             ->add('submit',SubmitType::class,[
                 'label'=>'Valider la réservation',

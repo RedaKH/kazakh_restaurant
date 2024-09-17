@@ -1,24 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ 'home_title'|trans }}{% endblock %}
 
 {% block body %}
 <main>
-
     <section class="hero is-danger is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title ml9" id="resto">
                     <span class="text-wrapper">
-                        <span class="letters">Restaurant Franco-Kazakh</span>
+                        <span class="letters">{{ 'hero_title'|trans }}</span>
                     </span>
                 </h1>
                 <h2 id="kazakh" class="subtitle ml9">
                     <span class="text-wrapper">
-                        <span class="letters">Découvrez les meilleures saveurs du Kazakhstan et laissez-vous transporter dans ce pays</span>
+                        <span class="letters">{{ 'hero_subtitle'|trans }}</span>
                     </span>
                 </h2>
-                <button class="button is-primary"> Explorez le site</button>
+                <button class="button is-primary"> {{ 'explore_site'|trans }}</button>
             </div>
         </div>
     </section>
@@ -27,10 +26,8 @@
         <div class="container has-text-centered">
             <div class="columns">
                 <div class="column is-two-thirds">
-                    <h2 class="title is-2">Qui nous sommes?</h2>
-                    <p>
-                        Bienvenue chez Besharmaq Food, votre destination pour découvrir la cuisine authentique du Kazakhstan en plein cœur de la ville...
-                    </p>
+                    <h2 class="title is-2">{{ 'about_us_title'|trans }}</h2>
+                    <p>{{ 'about_us_content'|trans }}</p>
                 </div>
                 <div class="column">
                     <img class="image is-640x380" src="https://foodperestroika.com/wp-content/uploads/2015/11/BeshbarmakZhetiKazyna2-small.jpg" alt="Image du plat Beshbarmak">
@@ -41,17 +38,17 @@
 
     <section class="section services" data-aos="flip-left" data-aos-offset="500" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Nos services</h1>
+            <h1 class="title is-1">{{ 'services_title'|trans }}</h1>
             <div class="columns">
                 <div class="column is-mobile">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('Restaurant-Online-Food-Delivery-1.webp') }}" alt="Service de livraison">
-                            <p class="subtitle">Livraisons</p>
+                            <img src="{{ asset('Restaurant-Online-Food-Delivery-1.webp') }}" alt="{{ 'delivery_service'|trans }}">
+                            <p class="subtitle">{{ 'delivery_service'|trans }}</p>
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="{{ path('livraison') }}">En savoir plus</a>
+                                <a href="{{ path('livraison') }}">{{ 'en savoir plus'|trans }}</a>
                             </p>
                         </footer>
                     </div>
@@ -60,12 +57,12 @@
                 <div class="column is-mobile">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('tgi-fridays-drinks.jpeg') }}" alt="Service de privatisation">
-                            <p class="subtitle">Privatisation</p>
+                            <img src="{{ asset('tgi-fridays-drinks.jpeg') }}" alt="{{ 'private_service'|trans }}">
+                            <p class="subtitle">{{ 'private_service'|trans }}</p>
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="{{ path('privatisation') }}">En savoir plus</a>
+                                <a href="{{ path('privatisation') }}">{{ 'En savoir plus'|trans }}</a>
                             </p>
                         </footer>
                     </div>
@@ -74,12 +71,12 @@
                 <div class="column">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('doggy-bag.jpg') }}" alt="Service à emporter">
-                            <p class="subtitle">Emporter</p>
+                            <img src="{{ asset('doggy-bag.jpg') }}" alt="{{ 'takeaway_service'|trans }}">
+                            <p class="subtitle">{{ 'takeaway_service'|trans }}</p>
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="{{ path('emporter') }}">En savoir plus</a>
+                                <a href="{{ path('emporter') }}">{{ 'En savoir plus'|trans }}</a>
                             </p>
                         </footer>
                     </div>
@@ -88,12 +85,12 @@
                 <div class="column is-mobile">
                     <div class="card">
                         <div class="card-image">
-                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="Service sur place">
-                            <p class="subtitle">Sur place</p>
+                            <img src="{{ asset('how-to-spend-less-at-restaurants.jpg') }}" alt="{{ 'dinein_service'|trans }}">
+                            <p class="subtitle">{{ 'dinein_service'|trans }}</p>
                         </div>
                         <footer class="card-footer">
                             <p class="card-footer-item">
-                                <a href="{{ path('surplace') }}">En savoir plus</a>
+                                <a href="{{ path('surplace') }}">{{ 'En savoir plus'|trans }}</a>
                             </p>
                         </footer>
                     </div>
@@ -104,7 +101,7 @@
 
     <section class="section blog" data-aos="zoom-in-up" data-aos-offset="700" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title">Notre Blog</h1>
+            <h1 class="title">{{ 'blog_title'|trans }}</h1>
 
             <div class="columns is-multiline">
                 {% for blog in blogs %}
@@ -121,30 +118,28 @@
                                     <p>{{ blog.content|slice(0, 100)|raw }}...</p>
                                     <time datetime="{{ blog.createdAt|date('Y-m-d') }}">{{ blog.createdAt|date('Y-m-d') }}</time>
                                 </div>
-                                <a href="{{ path('blog_read', {id: blog.id}) }}" class="button is-link is-small">En savoir plus</a>
+                                <a href="{{ path('blog_read', {id: blog.id}) }}" class="button is-link is-small">{{ 'En savoir plus'|trans }}</a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-
         </div>
     </section>
 
-
     <section class="section temoignages" data-aos="zoom-in-up" data-aos-offset="800" data-aos-easing="ease-in-sine">
         <div class="container has-text-centered">
-            <h1 class="title is-1">Nos témoignages</h1>
+            <h1 class="title is-1">{{ 'testimonials_title'|trans }}</h1>
             <div class="columns is-multiline">
                 <div class="column is-full">
                     <div style="margin: 0 auto; padding-top: 80px; padding-bottom: 80px;">
                         <div class="testimonial-quote group">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kassym-Jomart_Tokayev_%282020-02-01%29.jpg/220px-Kassym-Jomart_Tokayev_%282020-02-01%29.jpg" alt="Kassym-Jomart Tokayev">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Kassym-Jomart_Tokayev_%282020-02-01%29.jpg/220px-Kassym-Jomart_Tokayev_%282020-02-01%29.jpg" alt="{{ 'testimonials_author'|trans }}">
                             <div class="quote-container">
                                 <blockquote>
-                                    <p>Ce restaurant est un pur délice je recommande à tous les Kazakhs</p>
+                                    <p>{{ 'testimonials_quote'|trans }}</p>
                                 </blockquote>
-                                <cite><span>Kassym Jomart Tokayev</span><br>Président du Kazakhstan</cite>
+                                <cite><span>{{ 'testimonials_author'|trans }}</span><br>{{ 'testimonials_role'|trans }}</cite>
                             </div>
                         </div>
                     </div>
@@ -152,6 +147,5 @@
             </div>
         </div>
     </section>
-
 </main>
 {% endblock %}

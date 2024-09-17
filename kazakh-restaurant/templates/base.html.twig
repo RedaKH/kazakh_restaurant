@@ -38,13 +38,14 @@
                 <a href="{{path('make_reservation')}}" class="navbar-item">Reservations</a>
                 
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">Langues</a>
+                    <a class="navbar-link">{{ 'Langues'|trans }}</a>
                     <div class="navbar-dropdown">
-                        <a href="{{ path('change_locale', {locale: 'fr'}) }}" class="navbar-item">Français</a>
-                        <a href="{{ path('change_locale', {locale: 'en'}) }}" class="navbar-item">English</a>
-                        <a href="{{ path('change_locale', {locale: 'kk'}) }}" class="navbar-item">қазақша</a>
+                        <a href="{{ path('change_locale', {'locale': 'fr'}) }}" class="navbar-item">Français</a>
+                        <a href="{{ path('change_locale', {'locale': 'en'}) }}" class="navbar-item">English</a>
+                        <a href="{{ path('change_locale', {'locale': 'kk'}) }}" class="navbar-item">қазақша</a>
                     </div>
                 </div>
+                
                 
             </div>
         </nav>

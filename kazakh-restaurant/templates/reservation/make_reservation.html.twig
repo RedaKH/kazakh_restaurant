@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}Effectuer une réservation{% endblock %}
+{% block title %}{{ 'reservation_title'|trans }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="title is-1  has-text-centered">Réservation</h1>
+<div class="container mt-5">
+    <h1 class="title is-1 has-text-centered">{{ 'reservation_title'|trans }}</h1>
 
     {% for label, messages in app.flashes %}
         <div class="notification is-{{ label }}">
@@ -16,86 +16,116 @@
 
     {{ form_start(form, {'action': path('make_reservation'), 'attr': {'class': 'box'}}) }}
 
-    <div class="field">
-        {{ form_label(form.client_nom, 'Nom', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_nom, {'attr': {'class': 'input'}}) }}
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_nom, 'reservation_form.client_nom'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_nom, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_prenom, 'reservation_form.client_prenom'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_prenom, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="field">
-        {{ form_label(form.client_prenom, 'Prénom', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_prenom, {'attr': {'class': 'input'}}) }}
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_email, 'reservation_form.client_email'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_email, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_num_tel, 'reservation_form.client_num_tel'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_num_tel, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="field">
-        {{ form_label(form.client_email, 'Email', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_email, {'attr': {'class': 'input'}}) }}
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_adresse, 'reservation_form.client_adresse'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_adresse, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_ville, 'reservation_form.client_ville'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_ville, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="field">
-        {{ form_label(form.client_adresse, 'Adresse', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_adresse, {'attr': {'class': 'input'}}) }}
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.client_code_postal, 'reservation_form.client_code_postal'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.client_code_postal, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.date_reservation, 'reservation_form.date_reservation'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.date_reservation, {'attr': {'class': 'input'}}) }}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="field">
-        {{ form_label(form.client_ville, 'Ville', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_ville, {'attr': {'class': 'input'}}) }}
+    <div class="columns">
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.ReservationType, 'reservation_form.ReservationType'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        {{ form_widget(form.ReservationType) }}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="field">
-        {{ form_label(form.client_code_postal, 'Code Postal', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_code_postal, {'attr': {'class': 'input'}}) }}
-        </div>
-    </div>
-
-    <div class="field">
-        {{ form_label(form.client_num_tel, 'Numéro de téléphone', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.client_num_tel, {'attr': {'class': 'input'}}) }}
-        </div>
-    </div>
-
-    <div class="field">
-        {{ form_label(form.date_reservation, 'Date de Réservation', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.date_reservation, {'attr': {'class': 'input'}}) }}
-        </div>
-    </div>
-
-    <div class="field">
-        {{ form_label(form.ReservationType, 'Type de Réservation', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            <div class="select is-fullwidth">
-                {{ form_widget(form.ReservationType) }}
+        <div class="column is-half">
+            <div class="field">
+                {{ form_label(form.nombre_personne, 'reservation_form.nombre_personne'|trans, {'label_attr': {'class': 'label'}}) }}
+                <div class="control">
+                    {{ form_widget(form.nombre_personne, {'attr': {'class': 'input'}}) }}
+                </div>
             </div>
         </div>
     </div>
 
     <div class="field">
-        {{ form_label(form.nombre_personne, 'Nombre de personnes', {'label_attr': {'class': 'label'}}) }}
-        <div class="control">
-            {{ form_widget(form.nombre_personne, {'attr': {'class': 'input'}}) }}
-        </div>
-    </div>
-
-    <div class="field">
-        {{ form_label(form.plat, 'Plat', {'label_attr': {'class': 'label'}}) }}
+        {{ form_label(form.plat, 'reservation_form.plat'|trans, {'label_attr': {'class': 'label'}}) }}
         <div class="control">
             {{ form_widget(form.plat, {'attr': {'class': 'input'}}) }}
         </div>
     </div>
 
-    <div class="field">
+    <div class="field is-grouped is-grouped-centered">
         <div class="control">
             {{ form_widget(form.submit, {'attr': {'class': 'button is-primary'}}) }}
         </div>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service à Emporter - Beshbarmaq Food{% endblock %}
+{% block title %}{{ 'emporter_title'|trans }}{% endblock %}
 
 {% block body %}
 <main>
@@ -8,8 +8,8 @@
         <div class="breadcrumb-container mt-4">
             <nav class="breadcrumb has-arrow-separator is-medium" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{{ path('accueil') }}">Accueil</a></li>
-                    <li class="is-active"><a href="{{ path('emporter') }}" aria-current="page">Emporter</a></li>
+                    <li><a href="{{ path('accueil') }}">{{ 'breadcrumb_home'|trans }}</a></li>
+                    <li class="is-active"><a href="{{ path('emporter') }}" aria-current="page">{{ 'breadcrumb_emporter'|trans }}</a></li>
                 </ul>
             </nav>
         </div>
@@ -19,16 +19,16 @@
                 <div class="columns is-multiline">
                     <div class="column is-half">
                         <div class="content">
-                            <p><strong>Beshbarmaq Food</strong>, votre restaurant traditionnel kazakh, vous propose un large choix de plats à emporter, soigneusement préparés pour vous.</p>
-                            <p>Que vous souhaitiez un repas rapide ou déguster nos spécialités kazakhes dans le confort de votre domicile, nous sommes à votre service pour préparer vos plats à emporter.</p>
-                            <p>Avec <strong>Beshbarmaq Food</strong>, profitez d'une cuisine authentique sans avoir à cuisiner. Contactez-nous, passez votre commande et nous préparerons vos plats dans les plus brefs délais pour que vous puissiez savourer un délicieux repas kazakh où que vous soyez.</p>
-                            <p>Si vous êtes dans le secteur de Paris et ses environs, venez découvrir notre restaurant kazakh. De l'entrée au plat principal, notre chef originaire d'Almaty vous garantit un festin riche en saveurs.</p>
-                            <p>Le service à emporter est disponible <strong>à partir de 25 euros</strong> dans des zones limitées. N'hésitez pas à nous contacter pour plus d'informations.</p>
+                            <p>{{ 'emporter_intro_1'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_2'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_3'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_4'|trans|raw }}</p>
+                            <p>{{ 'emporter_intro_5'|trans|raw }}</p>
                         </div>
                     </div>
                     <div class="column is-half">
                         <figure class="image is-4by3">
-                            <img src="{{ asset('doggy-bag.jpg') }}" alt="Service à emporter Beshbarmaq Food">
+                            <img src="{{ asset('doggy-bag.jpg') }}" alt="{{ 'emporter_image_alt'|trans }}">
                         </figure>
                     </div>
                 </div>
