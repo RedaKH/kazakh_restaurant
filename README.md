@@ -29,7 +29,7 @@ cd votre-repository
 
 ---
 
-```
+
 
 ### 2. Installer les dépendances PHP
 
