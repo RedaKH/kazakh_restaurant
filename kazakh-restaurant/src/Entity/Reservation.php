@@ -42,7 +42,30 @@ class Reservation
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Employe $livreur = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $entree = null;
+
+    #[ORM\Column]
+    private ?int $QteEntree = null;
+
+    #[ORM\Column]
+    private ?int $QtePlat = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Boisson = null;
+
+    #[ORM\Column]
+    private ?int $QteBoisson = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $dessert = null;
+
+    #[ORM\Column]
+    private ?int $qteDessert = null;
     
+   
+
 
 
 
@@ -141,8 +164,91 @@ class Reservation
         return $this;
     }
 
+    public function getEntree(): ?string
+    {
+        return $this->entree;
+    }
 
+    public function setEntree(string $entree): static
+    {
+        $this->entree = $entree;
 
+        return $this;
+    }
+
+    public function getQteEntree(): ?int
+    {
+        return $this->QteEntree;
+    }
+
+    public function setQteEntree(int $QteEntree): static
+    {
+        $this->QteEntree = $QteEntree;
+
+        return $this;
+    }
+
+    public function getQtePlat(): ?int
+    {
+        return $this->QtePlat;
+    }
+
+    public function setQtePlat(int $QtePlat): static
+    {
+        $this->QtePlat = $QtePlat;
+
+        return $this;
+    }
+
+    public function getBoisson(): ?string
+    {
+        return $this->Boisson;
+    }
+
+    public function setBoisson(string $Boisson): static
+    {
+        $this->Boisson = $Boisson;
+
+        return $this;
+    }
+
+    public function getQteBoisson(): ?int
+    {
+        return $this->QteBoisson;
+    }
+
+    public function setQteBoisson(int $QteBoisson): static
+    {
+        $this->QteBoisson = $QteBoisson;
+
+        return $this;
+    }
+
+    public function getDessert(): ?string
+    {
+        return $this->dessert;
+    }
+
+    public function setDessert(string $dessert): static
+    {
+        $this->dessert = $dessert;
+
+        return $this;
+    }
+
+    public function getQteDessert(): ?int
+    {
+        return $this->qteDessert;
+    }
+
+    public function setQteDessert(int $qteDessert): static
+    {
+        $this->qteDessert = $qteDessert;
+
+        return $this;
+    }
+
+    
 
 
    

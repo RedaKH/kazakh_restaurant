@@ -69,22 +69,84 @@ class ClientReservationType extends AbstractType
                 'mapped' => false,
                 'label' => 'Numéro de téléphone',
             ])
+            ->add('entree', ChoiceType::class, [
+                'choices'  => [
+                    'Aucune entrée' => null,
+                    'Samsa' => 'samsa',
+                    'Baurzaks' => 'baurzaks',
+                    'Kurt' => 'kurt',
+                    'Zhaya' => 'zhaya',
+                    'Taba nan' => 'taba nan'
+                ],
+                'label' => 'Choisissez votre entrée',
+                'attr' => ['class' => 'select is-fullwidth'],
+            ])
+            ->add('qteentree', IntegerType::class, [
+                'label' => 'Quantité entrée',
+                'required' => false,
+                'data' => 0,
+            ])
+
             ->add('plat', ChoiceType::class, [
                 'choices'  => [
+                    'Aucun plat' => null,
                     'Beshbarmak' => 'beshbarmak',
                     'Kazy' => 'kazy',
                     'Kuurdak' => 'kuurdak',
                     'Shashlik' => 'shashlik',
                     'Plov' => 'plov',
                     'Lagman' => 'lagman',
-                    'Manty' => 'manty',
+                    'Manty' => 'manty'
                 ],
                 'label' => 'Choisissez votre plat',
                 'attr' => ['class' => 'select is-fullwidth'],
             ])
-            ->add('submit',SubmitType::class,[
-                'label'=>'Valider la réservation',
-                'attr'=>['class'=>'button-is-link']
+            ->add('qteplat', IntegerType::class, [
+                'label' => 'Quantité plat',
+                'required' => false,
+                'data' => 0,
+            ])
+
+            ->add('dessert', ChoiceType::class, [
+                'choices'  => [
+                    'Aucun dessert' => null,
+                    'Shelpek' => 'shelpek',
+                    'Baursak' => 'baursak',
+                    'Kuyrdak' => 'kuyrdak',
+                    'Chak-chak' => 'chak-chak'
+                ],
+                'label' => 'Choisissez votre dessert',
+                'attr' => ['class' => 'select is-fullwidth'],
+            ])
+            ->add('qtedessert', IntegerType::class, [
+                'label' => 'Quantité dessert',
+                'required' => false,
+                'data' => 0,
+            ])
+
+            ->add('boisson', ChoiceType::class, [
+                'choices'  => [
+                    'Aucune boisson' => null,
+                    'Kumis' => 'kumis',
+                    'Shubat' => 'shubat',
+                    'Airan' => 'airan',
+                    'Kymyz' => 'kymyz',
+                    'Tchai' => 'tchai',
+                    'Kompot' => 'kompot',
+                    'Kvass' => 'kvass',
+                ],
+                'label' => 'Choisissez votre boisson',
+                'attr' => ['class' => 'select is-fullwidth'],
+            ])
+            ->add('qteboisson', IntegerType::class, [
+                'label' => 'Quantité boisson',
+                'required' => false,
+                'data' => 0,
+            ])
+
+            ->add('submit', SubmitType::class, [
+                'label' => 'Valider la réservation',
+                'attr' => ['class' => 'button-is-link']
             ]);
     }
 

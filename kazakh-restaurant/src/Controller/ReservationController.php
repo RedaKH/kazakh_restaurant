@@ -120,25 +120,41 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    private function handleLivraison(Reservation $reservation){
-        if ($reservation->getReservationType()===ReservationType::LIVRAISON) {
-            
-        
-            $client = $reservation->getClient();
-            $codeLivraison = random_int(10000,99999);
-            $client->setCodeClient($codeLivraison);
+    private function handleLivraison(Reservation $reservation): void
+    {
+        try {
+            if ($reservation->getReservationType() === ReservationType::LIVRAISON) {
+                $client = $reservation->getClient();
+                
+                // Vérification que le client existe
+                if (!$client) {
+                    throw new \Exception('Client non trouvé');
+                }
 
-            $this->emailService->sendCodeCli($client->getEmail(), $client->getNom(),$codeLivraison);
-            $this->entityManager->persist($client);
+                // Génération du code de livraison
+                $codeLivraison = random_int(10000, 99999);
+                $client->setCodeClient($codeLivraison);
 
+                // Vérification de l'email du client
+                if (!$client->getEmail()) {
+                    throw new \Exception('Email du client manquant');
+                }
+
+                // Envoi de l'email
+                $this->emailService->sendCodeCli(
+                    $client->getEmail(),
+                    $client->getNom(),
+                    (string)$codeLivraison
+                );
+
+                $this->entityManager->persist($client);
+            }
+        } catch (\Exception $e) {
+            // Log l'erreur
+            $this->addFlash('error', 'Erreur lors de l\'envoi du code de livraison : ' . $e->getMessage());
         }
-
-        
-
-
-
-
     }
+
     #[Route('/reservation/accept/{id}', name: 'reservation_accept')]
         public function accept($id): Response
         {
@@ -155,6 +171,13 @@ class ReservationController extends AbstractController
          $reservationHistory->setDateReservation($reservation->getDateReservation());
          $reservationHistory->setDateAccepted(new \DateTime()); //date actuelle
          $reservationHistory->setPlat($reservation->getPlat());
+         $reservationHistory->setQtePlat($reservation->getQtePlat());
+         $reservationHistory->setEntree($reservation->getEntree());
+         $reservationHistory->setQteEntree($reservation->getQteEntree());
+         $reservationHistory->setBoisson($reservation->getBoisson());
+         $reservationHistory->setQteBoisson($reservation->getQteBoisson());
+         $reservationHistory->setDessert($reservation->getDessert());
+         $reservationHistory->setQteDessert($reservation->getQteDessert());
          $reservationHistory->setEmploye($reservation->getLivreur());
          $reservationHistory->setCommande($reservation->getCommande());
          $reservationHistory->setReservationType($reservation->getReservationType()->value);

@@ -3,35 +3,96 @@
 {% block title %} Historique des réservations {% endblock %}
 {% block body %}
     
-<h1 class="is-1">Historique des réservations</h1>
 
-<table class=" table is-striped">
-
+<table class="table is-striped">
     <thead>
         <tr>
             <th>Client</th>
             <th>Email</th>
+            <th>Entrée</th>
+            <th>Quantité Entrée</th>
+            <th>Plat</th>
+            <th>Quantité Plat</th>
+            <th>Boisson</th>
+            <th>Quantité Boisson</th>
+            <th>Dessert</th>
+            <th>Quantité Dessert</th>
             <th>Date de réservation</th>
             <th>Date d'acceptation</th>
             <th>Type de réservation</th>
-
         </tr>
     </thead>
     <tbody>
         {% for reservation in history %}
-            
         <tr>
             <td>{{reservation.clientName}}</td>
             <td>{{reservation.clientEmail}}</td>
-            <td>{{reservation.dateReservation|date('m/d/Y H:i')}}</td>
-            <td>{{reservation.dateAccepted|date('m/d/Y H:i')}}</td>
+            <td>
+                {% if reservation.entree is not empty %}
+                    {{reservation.entree}}
+                {% else %}
+                    Aucune entrée
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.qteEntree is not null %}
+                    {{reservation.qteEntree}}
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.plat is not empty %}
+                    {{reservation.plat}}
+                {% else %}
+                    Aucun plat
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.qtePlat is not null %}
+                    {{reservation.qtePlat}}
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.boisson is not empty %}
+                    {{reservation.boisson}}
+                {% else %}
+                    Aucune boisson
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.qteBoisson is not null %}
+                    {{reservation.qteBoisson}}
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.dessert is not empty %}
+                    {{reservation.dessert}}
+                {% else %}
+                    Aucun dessert
+                {% endif %}
+            </td>
+            <td>
+                {% if reservation.qteDessert is not null %}
+                    {{reservation.qteDessert}}
+                {% else %}
+                    0
+                {% endif %}
+            </td>
+            <td>{{reservation.dateReservation|date('d/m/Y H:i')}}</td>
+            <td>{{reservation.dateAccepted|date('d/m/Y H:i')}}</td>
             <td>{{reservation.reservationType}}</td>
         </tr>
+        {% else %}
+        <tr>
+            <td colspan="13">Aucun historique trouvé.</td>
+        </tr>
         {% endfor %}
-
     </tbody>
-
-
 </table>
-{% endblock  %}
+{% endblock %}
 

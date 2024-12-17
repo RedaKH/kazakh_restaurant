@@ -117,11 +117,58 @@
             </div>
         </div>
     </div>
+    
 
     <div class="field">
-        {{ form_label(form.plat, 'reservation_form.plat'|trans, {'label_attr': {'class': 'label'}}) }}
+        {{ form_label(form.qteentree, 'Quantité entrée'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.qteentree, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label(form.entree, 'Choisissez votre entrée'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.entree, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+    <div class="field">
+        {{ form_label(form.dessert, 'Choisissez votre dessert'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.dessert, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.qtedessert, 'Quantité du dessert'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.qtedessert, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.boisson, 'Choisissez votre boisson'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.boisson, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.qteboisson, 'quantité de boisson'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.qteboisson, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+
+    <div class="field">
+        {{ form_label(form.plat, 'Choississez votre plat'|trans, {'label_attr': {'class': 'label'}}) }}
         <div class="control">
             {{ form_widget(form.plat, {'attr': {'class': 'input'}}) }}
+        </div>
+    </div>
+    <div class="field"></div>
+        {{ form_label(form.qteplat, 'Quantité du plat'|trans, {'label_attr': {'class': 'label'}}) }}
+        <div class="control">
+            {{ form_widget(form.qteplat, {'attr': {'class': 'input'}}) }}
         </div>
     </div>
 
